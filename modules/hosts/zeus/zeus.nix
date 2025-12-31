@@ -13,7 +13,7 @@
     imports = with inputs.self.modules.nixos; [
       locale
       systemd-boot
-      ly
+      tuigreet
       sound
       intel
       ssd
@@ -25,6 +25,7 @@
       systemSvc
       twingate
       stylix
+      nix
       julius
     ];
   };
