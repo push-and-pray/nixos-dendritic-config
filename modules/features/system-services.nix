@@ -1,15 +1,5 @@
 {inputs, ...}: {
   flake.modules = {
-    homeManager = {
-      diskManagement = {
-        services.udiskie.enable = true;
-      };
-
-      bluetooth = {
-        services.blueman-applet.enable = true;
-      };
-    };
-
     nixos = {
       twingate = {
         services.twingate.enable = true;
@@ -51,6 +41,16 @@
           networkmanager.enable = true;
           dhcpcd.enable = false;
         };
+      };
+    };
+
+    homeManager = {
+      diskManagement = {
+        services.udiskie.enable = true;
+      };
+
+      bluetooth = {
+        services.blueman-applet.enable = true;
       };
     };
   };

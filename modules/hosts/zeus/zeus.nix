@@ -22,7 +22,6 @@
       docker
       desktop
       homeManager
-      systemSvc
       twingate
       stylix
       nix

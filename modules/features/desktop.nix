@@ -1,6 +1,6 @@
 {inputs, ...}: {
   flake.modules.nixos.desktop = {
-    imports = with inputs.self.modules.nixos; [hyprland hyprlock];
+    imports = with inputs.self.modules.nixos; [hyprland hyprlock systemSvc];
     home-manager.sharedModules = with inputs.self.modules.homeManager; [hyprpaper hypridle hyprpolkitagent waybar mako desktop-apps cli];
   };
 }
