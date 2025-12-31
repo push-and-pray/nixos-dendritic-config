@@ -10,6 +10,16 @@
     system.stateVersion = "25.11";
     hardware.facter.reportPath = ./facter.json;
     networking.hostName = "zeus";
+
+    home-manager.sharedModules = [
+      {
+        wayland.windowManager.hyprland.settings.monitor = [
+          "DP-1,preferred,0x0,1"
+          "HDMI-A-2,preferred,-1440x-450,1,transform,1"
+        ];
+      }
+    ];
+
     imports = with inputs.self.modules.nixos; [
       locale
       systemd-boot
