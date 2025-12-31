@@ -3,7 +3,7 @@
     inputs.git-hooks-nix.flakeModule
   ];
 
-  perSystem = {config, ...}: {
+  perSystem = {
     pre-commit = {
       settings.hooks = {
         alejandra.enable = true;
@@ -11,7 +11,5 @@
         statix.enable = true;
       };
     };
-
-    devShells.default = config.pre-commit.devShell;
   };
 }
