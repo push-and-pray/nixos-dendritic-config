@@ -124,7 +124,10 @@
           enable = true;
           systemd.enable = false;
           settings = {
-            monitor = "";
+            monitor = [
+              "DP-1,preferred,0x0,1"
+              "HDMI-A-2,preferred,-1440x-450,1,transform,1"
+            ];
             input = {
               kb_layout = "dk";
             };
