@@ -41,8 +41,11 @@
         lib,
         ...
       }: {
-        stylix.targets.firefox.profileNames =
-          lib.mkIf config.programs.firefox.enable ["default"];
+        stylix.targets.firefox = lib.mkIf config.programs.firefox.enable {
+          profileNames = ["default"];
+          colors.enable = true;
+          firefoxGnomeTheme.enable = true;
+        };
 
         stylix.targets.hyprlock.enable =
           lib.mkIf config.programs.hyprlock.enable false;
