@@ -8,6 +8,7 @@
       enable = true;
       image = ../../rsc/bg.png;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+      polarity = "dark";
 
       cursor = {
         package = pkgs.simp1e-cursors;
