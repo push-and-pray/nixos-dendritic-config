@@ -23,11 +23,11 @@
         };
         serif = {
           package = pkgs.nerd-fonts.jetbrains-mono;
-          name = "JetBrainsMono Nerd Font";
+          name = "JetBrainsMono Nerd Font Propo";
         };
         sansSerif = {
           package = pkgs.nerd-fonts.jetbrains-mono;
-          name = "JetBrainsMono Nerd Font";
+          name = "JetBrainsMono Nerd Font Propo";
         };
         emoji = {
           package = pkgs.noto-fonts-color-emoji;
