@@ -41,6 +41,7 @@
       twingate
       stylix
       nix
+      nightShiftDdc
       julius
     ];
   };
