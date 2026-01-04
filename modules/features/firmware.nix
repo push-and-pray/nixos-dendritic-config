@@ -11,7 +11,7 @@
       imports = with inputs.self.modules.nixos; [
         firmware
       ];
-      hardware.amd.intel.updateMicrocode = true;
+      hardware.cpu.amd.updateMicrocode = true;
     };
 
     firmware = {
