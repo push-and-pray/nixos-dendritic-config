@@ -11,6 +11,11 @@
           inputs.self.modules.homeManager.gammastepDdcHook
         ];
       };
+      hyprsunset = {
+        home-manager.sharedModules = [
+          inputs.self.modules.homeManager.hyprsunset
+        ];
+      };
     };
 
     homeManager = {
@@ -23,6 +28,27 @@
           temperature = {
             day = 6500;
             night = 2500;
+          };
+        };
+      };
+      hyprsunset = {
+        services.hyprsunset = {
+          enable = true;
+          settings = {
+            profile = [
+              {
+                time = "07:00";
+                identity = true;
+              }
+              {
+                time = "18:00";
+                temperature = 4000;
+              }
+              {
+                time = "20:00";
+                temperature = 2500;
+              }
+            ];
           };
         };
       };
