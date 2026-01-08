@@ -7,6 +7,8 @@
         vscode
         fuzzel
         kitty
+        signal
+        discord
       ];
     };
     spotify = {pkgs, ...}: {
@@ -32,6 +34,12 @@
       programs.kitty = {
         enable = true;
       };
+    };
+    signal = {pkgs, ...}: {
+      home.packages = with pkgs; [signal-desktop];
+    };
+    discord = {pkgs, ...}: {
+      home.packages = with pkgs; [discord];
     };
   };
 }
