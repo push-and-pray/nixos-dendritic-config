@@ -9,6 +9,8 @@
         kitty
         signal
         discord
+        surfer
+        drawio
       ];
     };
     spotify = {pkgs, ...}: {
@@ -40,6 +42,12 @@
     };
     discord = {pkgs, ...}: {
       home.packages = with pkgs; [discord];
+    };
+    surfer = {pkgs, ...}: {
+      home.packages = with pkgs; [surfer];
+    };
+    drawio = {pkgs, ...}: {
+      home.packages = with pkgs; [drawio];
     };
   };
 }
