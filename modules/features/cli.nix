@@ -25,8 +25,8 @@
         kubelogin-oidc
         kubeseal
         fluxcd
-        teleport
         k9s
+        kubernetes-helm
       ];
     };
     utils = {pkgs, ...}: {
