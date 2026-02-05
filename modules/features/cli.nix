@@ -34,6 +34,7 @@
         curl
         wget
         dig
+        gemini-cli
       ];
     };
     nixvim = {pkgs, ...}: {
