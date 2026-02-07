@@ -11,6 +11,7 @@
         discord
         surfer
         drawio
+        moonlight
       ];
     };
     spotify = {pkgs, ...}: {
@@ -48,6 +49,9 @@
     };
     drawio = {pkgs, ...}: {
       home.packages = with pkgs; [drawio];
+    };
+    moonlight = {pkgs, ...}: {
+      home.packages = with pkgs; [moonlight-qt];
     };
   };
 }
