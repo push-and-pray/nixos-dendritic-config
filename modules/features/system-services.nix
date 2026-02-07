@@ -4,6 +4,9 @@
       twingate = {
         services.twingate.enable = true;
       };
+      tailscale = {
+        services.tailscale.enable = true;
+      };
       systemSvc = {
         imports = with inputs.self.modules.nixos; [
           diskManagement
