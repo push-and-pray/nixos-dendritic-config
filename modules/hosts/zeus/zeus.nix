@@ -13,7 +13,14 @@
     nixpkgs.hostPlatform = "x86_64-linux";
     system.stateVersion = "25.11";
     hardware.facter.reportPath = ./facter.json;
-    networking.hostName = "zeus";
+
+    networking = {
+      hostName = "zeus";
+      interfaces = {
+        enp5s0.wakeOnLan.enable = true;
+        wlo1.wakeOnLan.enable = true;
+      };
+    };
 
     home-manager.sharedModules = [
       {
