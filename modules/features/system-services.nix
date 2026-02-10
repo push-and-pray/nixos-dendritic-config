@@ -28,6 +28,15 @@
       keyring = {
         services.gnome.gnome-keyring.enable = true;
         programs.seahorse.enable = true;
+
+        home-manager.sharedModules = [
+          {
+            home.file.".vscode/argv.json".text = builtins.toJSON {
+              "password-store" = "gnome-libsecret";
+              "enable-crash-reporter" = false;
+            };
+          }
+        ];
       };
 
       bluetooth = {
