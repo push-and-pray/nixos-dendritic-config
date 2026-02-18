@@ -34,6 +34,7 @@
               bind = $mod, N, exec, dms ipc call notifications toggle
               bind = $mod, Y, exec, dms ipc call dankdash wallpaper
               bind = $mod, TAB, exec, dms ipc call hypr toggleOverview
+              bind = $mod, P, exec, dms ipc call powermenu toggle
 
               # Security
               bind = $mod ALT, L, exec, dms ipc call lock lock
