@@ -1,7 +1,17 @@
 {inputs, ...}: {
   flake.modules.nixos.desktop = {
-    imports = with inputs.self.modules.nixos; [hyprland hyprlock systemSvc];
-    home-manager.sharedModules = with inputs.self.modules.homeManager; [hyprpaper hypridle hyprsunset hyprpolkitagent waybar mako desktop-apps fonts cli];
+    imports = with inputs.self.modules.nixos; [hyprland];
+    home-manager.sharedModules = with inputs.self.modules.homeManager; [desktop-apps fonts cli];
+
+    specialisation = {
+      default.configuration = {
+        imports = with inputs.self.modules.nixos; [hyprlock];
+        home-manager.sharedModules = with inputs.self.modules.homeManager; [fuzzel hyprpaper hypridle hyprsunset hyprpolkitagent waybar mako];
+      };
+      dank.configuration = {
+        programs.dms-shell.enable = true;
+      };
+    };
   };
 
   flake.modules.homeManager.fonts = {pkgs, ...}: {
