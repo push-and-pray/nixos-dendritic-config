@@ -11,11 +11,15 @@
         discord
         surfer
         drawio
+        kicad
         moonlight
       ];
     };
     spotify = {pkgs, ...}: {
       home.packages = with pkgs; [spotify];
+    };
+    kicad = {pkgs, ...}: {
+      home.packages = with pkgs; [kicad];
     };
     firefox = {
       programs.firefox = {
