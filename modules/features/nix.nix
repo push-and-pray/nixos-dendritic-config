@@ -1,5 +1,8 @@
-{
+{inputs, ...}: {
   flake.modules.nixos.nix = {
+    imports = [
+      inputs.determinate.nixosModules.default
+    ];
     nix.settings = {
       substituters = [
         "https://cache.nixos.org?priority=10"
