@@ -109,15 +109,17 @@
         };
       };
 
+      fuzzel = {pkgs, ...}: {
+        wayland.windowManager.hyprland.settings.bind = [
+          "SUPER,Space,exec,${pkgs.fuzzel}/bin/fuzzel --launch-prefix='uwsm app --'"
+        ];
+      };
+
       hyprland = {
         pkgs,
         lib,
         ...
       }: {
-        imports = [
-          inputs.self.modules.homeManager.fuzzel
-        ];
-
         home.packages = with pkgs; [
           brightnessctl
           playerctl
@@ -135,7 +137,6 @@
 
             bind = [
               "SUPER,Return,exec,kitty"
-              "SUPER,Space,exec,${pkgs.fuzzel}/bin/fuzzel --launch-prefix='uwsm app --'"
               "SUPER, L, exec,hyprlock"
 
               ",XF86MonBrightnessDown,exec,brightnessctl set 20%-"

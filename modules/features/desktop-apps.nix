@@ -5,7 +5,6 @@
         spotify
         firefox
         vscode
-        fuzzel
         kitty
         signal
         discord
