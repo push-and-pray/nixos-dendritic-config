@@ -47,7 +47,7 @@
       docker
       desktop
       homeManager
-      twingate
+      tailscale
       stylix
       nix
       julius
