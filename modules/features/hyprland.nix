@@ -24,7 +24,7 @@
           QT_AUTO_SCREEN_SCALE_FACTOR = "1";
           QT_QPA_PLATFORM = "wayland;xcb";
           QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-          QT_QPA_PLATFORMTHEME = "qt5ct";
+          ELECTRON_OZONE_PLATFORM_HINT = "auto";
         };
 
         home-manager.sharedModules = [
@@ -136,16 +136,6 @@
             };
 
             bind = [
-              "SUPER,Return,exec,kitty"
-              "SUPER, L, exec,hyprlock"
-
-              ",XF86MonBrightnessDown,exec,brightnessctl set 20%-"
-              ",XF86MonBrightnessUp,exec,brightnessctl set +20%"
-              ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
-              ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
-              ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-              ", XF86AudioPlay, exec, playerctl play-pause"
-
               "SUPER,q,killactive"
               "SUPER,f,fullscreen"
 
@@ -188,10 +178,6 @@
             workspace = [
               "special:scratchpad,gapsout:75,gapsin:10"
             ];
-
-            misc = {
-              disable_hyprland_logo = true;
-            };
           };
         };
       };

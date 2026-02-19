@@ -45,7 +45,7 @@
       ssd
       zram
       docker
-      desktop
+      dank
       homeManager
       tailscale
       stylix

@@ -40,6 +40,7 @@
       programs.kitty = {
         enable = true;
       };
+      wayland.windowManager.hyprland.settings.bind = ["SUPER, return, exec, kitty"];
     };
     signal = {pkgs, ...}: {
       home.packages = with pkgs; [signal-desktop];

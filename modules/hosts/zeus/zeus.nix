@@ -25,10 +25,6 @@
     home-manager.sharedModules = [
       {
         wayland.windowManager.hyprland.settings = {
-          monitor = [
-            "DP-1,preferred,0x0,1"
-            "HDMI-A-2,preferred,-1440x-700,1,transform,1"
-          ];
           workspace = [
             "2,monitor:DP-1"
             "1,monitor:HDMI-A-2"
@@ -49,7 +45,7 @@
       nvidia
       zram
       docker
-      desktop
+      dank
       homeManager
       tailscale
       stylix
