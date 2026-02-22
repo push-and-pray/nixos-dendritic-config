@@ -51,6 +51,7 @@
       zram
       docker
       libvirt
+      keyring
       dank
       homeManager
       tailscale
