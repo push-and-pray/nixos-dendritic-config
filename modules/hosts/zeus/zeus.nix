@@ -45,6 +45,7 @@
       nvidia
       zram
       docker
+      libvirt
       dank
       homeManager
       tailscale
