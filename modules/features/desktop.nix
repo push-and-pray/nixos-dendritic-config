@@ -1,6 +1,6 @@
 {inputs, ...}: {
   flake.modules.nixos.dank = {
-    imports = with inputs.self.modules.nixos; [hyprland network];
+    imports = with inputs.self.modules.nixos; [hyprland network keyring];
     home-manager.sharedModules = with inputs.self.modules.homeManager; [desktop-apps fonts cli dank];
 
     programs.dms-shell.enable = true;
