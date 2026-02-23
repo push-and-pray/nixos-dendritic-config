@@ -1,18 +1,21 @@
 {inputs, ...}: {
   flake.modules.homeManager.zsh = {
-    config,
-    lib,
-    ...
-  }: {
-    programs.zsh = {
-      enable = true;
-      oh-my-zsh = {
+    programs = {
+      zsh = {
         enable = true;
-        theme = "robbyrussell";
+        oh-my-zsh = {
+          enable = true;
+          theme = "robbyrussell";
+        };
       };
-    };
 
-    programs.direnv.enableZshIntegration = lib.mkIf config.programs.direnv.enable true;
+      starship = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+
+      direnv.enableZshIntegration = true;
+    };
   };
 
   flake.lib = {
