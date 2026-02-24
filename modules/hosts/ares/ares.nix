@@ -21,6 +21,7 @@
     };
 
     services.power-profiles-daemon.enable = true;
+    services.upower.enable = true;
 
     # Boost startup speed
     virtualisation.docker.enableOnBoot = false;
