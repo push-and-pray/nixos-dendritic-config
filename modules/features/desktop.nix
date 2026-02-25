@@ -3,7 +3,11 @@
     imports = with inputs.self.modules.nixos; [hyprland network keyring];
     home-manager.sharedModules = with inputs.self.modules.homeManager; [desktop-apps fonts cli dank];
 
-    programs.dms-shell.enable = true;
+    programs.dms-shell = {
+      enable = true;
+      enableCalendarEvents = false;
+      enableDynamicTheming = false;
+    };
   };
 
   flake.modules.homeManager = {
