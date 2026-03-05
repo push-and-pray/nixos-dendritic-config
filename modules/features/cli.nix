@@ -27,6 +27,7 @@
         fluxcd
         k9s
         kubernetes-helm
+        file
       ];
     };
     utils = {pkgs, ...}: {
@@ -47,7 +48,7 @@
       };
     };
 
-    git = {
+    git = {pkgs, ...}: {
       programs.git = {
         enable = true;
         settings = {
@@ -60,6 +61,10 @@
           };
         };
       };
+
+      home.packages = with pkgs; [
+        git-extras
+      ];
       programs.lazygit.enable = true;
     };
 
