@@ -25,7 +25,7 @@
         ];
       };
 
-      keyring = {
+      keyring = {pkgs, ...}: {
         services.gnome.gnome-keyring.enable = true;
         programs.seahorse.enable = true;
 
@@ -34,6 +34,16 @@
             home.file.".vscode/argv.json".text = builtins.toJSON {
               "password-store" = "gnome-libsecret";
               "enable-crash-reporter" = false;
+            };
+          }
+          {
+            programs.git = {
+              package = pkgs.gitFull;
+              settings = {
+                credential = {
+                  helper = "libsecret";
+                };
+              };
             };
           }
         ];
