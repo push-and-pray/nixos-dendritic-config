@@ -12,6 +12,7 @@
         drawio
         kicad
         moonlight
+        obsidian
       ];
     };
     spotify = {pkgs, ...}: {
@@ -56,6 +57,9 @@
     };
     moonlight = {pkgs, ...}: {
       home.packages = with pkgs; [moonlight-qt];
+    };
+    obsidian = {pkgs, ...}: {
+      home.packages = with pkgs; [obsidian];
     };
   };
 }
