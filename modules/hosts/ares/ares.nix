@@ -49,6 +49,7 @@
       dank
       homeManager
       tailscale
+      libvirt
       stylix
       nix
       julius
