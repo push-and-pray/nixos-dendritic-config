@@ -44,7 +44,6 @@
       sound
       amd
       ssd
-      zram
       docker
       dank
       homeManager

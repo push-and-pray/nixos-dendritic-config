@@ -48,7 +48,6 @@
       intel
       ssd
       nvidia
-      zram
       docker
       libvirt
       dank

@@ -14,8 +14,5 @@
         };
       };
     };
-    zram = {
-      zramSwap.enable = true;
-    };
   };
 }
