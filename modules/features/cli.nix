@@ -27,7 +27,7 @@
         fluxcd
         k9s
         kubernetes-helm
-        file
+        inputs.self.packages.${pkgs.system}.bcvk
       ];
     };
     utils = {pkgs, ...}: {
@@ -36,6 +36,7 @@
         wget
         dig
         gemini-cli
+        file
       ];
     };
     nixvim = {pkgs, ...}: {

@@ -1,12 +1,28 @@
 {inputs, ...}: {
-  flake.modules.nixos.dank = {
+  flake.modules.nixos.dank = {pkgs, ...}: {
     imports = with inputs.self.modules.nixos; [hyprland network keyring];
     home-manager.sharedModules = with inputs.self.modules.homeManager; [desktop-apps fonts cli dank];
+
+    environment.systemPackages = with pkgs; [
+      libnotify
+      qt6.qtmultimedia
+    ];
 
     programs.dms-shell = {
       enable = true;
       enableCalendarEvents = false;
       enableDynamicTheming = false;
+      plugins = {
+        dankPomodoroTimer = {
+          enable = true;
+          src = "${pkgs.fetchFromGitHub {
+            owner = "AvengeMedia";
+            repo = "dms-plugins";
+            rev = "master";
+            hash = "sha256-/155wFIotV9xiZzX9XRGs3ANjBcLJwS4kNDDNO6WkF0=";
+          }}/DankPomodoroTimer";
+        };
+      };
     };
   };
 
