@@ -2,24 +2,37 @@ name: "Build and Cache"
 on:
   push:
     branches: [main]
+    paths:
+      - "**.nix"
+      - "flake.lock"
+      - "**/facter.json"
+      - ".github/workflows/**"
 
 jobs:
-  build-hosts:
+  check:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v6
-
       - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-unstable
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - run: nix flake check --accept-flake-config
 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: cachix/cachix-action@v17
         with:
           name: push-and-pray-config
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-
       - name: Build Host
         run: |
           nix build \
