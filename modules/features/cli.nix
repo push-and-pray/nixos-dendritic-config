@@ -27,7 +27,6 @@
         fluxcd
         k9s
         kubernetes-helm
-        inputs.self.packages.${pkgs.system}.bcvk
       ];
     };
     utils = {pkgs, ...}: {
