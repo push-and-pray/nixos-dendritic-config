@@ -1,0 +1,35 @@
+name: "Update Nix dependencies"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  nix-flake-update:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.PAT }} # To allow update to trigger other workflows
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update flake.lock
+        run: nix flake update
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add flake.lock
+
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "chore: update flake.lock"
+            git push
+          else
+            echo "No changes to flake.lock, skipping commit."
+          fi

@@ -8,26 +8,26 @@ on:
       - "**/facter.json"
       - ".github/workflows/**"
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - run: nix flake check --accept-flake-config
 
   build:
     runs-on: ubuntu-latest
-
+    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
         with:
-          nix_path: nixpkgs=channel:nixos-unstable
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: cachix/cachix-action@v17
         with:
