@@ -124,6 +124,7 @@
           brightnessctl
           playerctl
           wl-clipboard
+          hyprshot
         ];
 
         wayland.windowManager.hyprland = {
@@ -173,6 +174,8 @@
 
               "SUPER,minus,togglespecialworkspace,scratchpad"
               "SUPER_SHIFT,minus,movetoworkspacesilent,special:scratchpad"
+
+              ",Print,exec,${pkgs.hyprshot}/bin/hyprshot -m region --clipboard-only"
             ];
 
             workspace = [
