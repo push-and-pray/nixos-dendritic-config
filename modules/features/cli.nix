@@ -37,6 +37,8 @@
         dig
         gemini-cli
         file
+        unzip
+        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.sam-ba
       ];
     };
     nixvim = {pkgs, ...}: {
