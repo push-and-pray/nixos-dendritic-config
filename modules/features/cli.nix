@@ -27,6 +27,7 @@
         fluxcd
         k9s
         kubernetes-helm
+        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.elemental
       ];
     };
     utils = {pkgs, ...}: {
