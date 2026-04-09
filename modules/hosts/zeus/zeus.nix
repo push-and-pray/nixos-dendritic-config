@@ -51,6 +51,7 @@
       docker
       libvirt
       dank
+      steam
       homeManager
       tailscale
       stylix
