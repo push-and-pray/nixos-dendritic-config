@@ -61,5 +61,10 @@
     obsidian = {pkgs, ...}: {
       home.packages = with pkgs; [obsidian];
     };
+    matlab = {pkgs, ...}: {
+      home.packages = [
+        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.matlab
+      ];
+    };
   };
 }

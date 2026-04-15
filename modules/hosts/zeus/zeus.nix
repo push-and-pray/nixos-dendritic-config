@@ -36,6 +36,7 @@
           ];
         };
       }
+      inputs.self.modules.homeManager.matlab
     ];
 
     hardware.i2c.enable = true;
