@@ -12,6 +12,7 @@
           modesetting.enable = true;
           powerManagement.enable = true;
         };
+        nvidia-container-toolkit.enable = true;
       };
     };
   };
