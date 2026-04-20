@@ -47,7 +47,7 @@
       home.packages = with pkgs; [signal-desktop];
     };
     discord = {pkgs, ...}: {
-      home.packages = with pkgs; [vesktop discord];
+      home.packages = with pkgs; [vesktop];
     };
     surfer = {pkgs, ...}: {
       home.packages = with pkgs; [surfer];
