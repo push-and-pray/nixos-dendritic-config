@@ -40,6 +40,7 @@
     ];
 
     hardware.i2c.enable = true;
+    boot.zswap.enable = true;
 
     imports = with inputs.self.modules.nixos; [
       locale
