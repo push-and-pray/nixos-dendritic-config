@@ -167,7 +167,7 @@
   desktopItem = makeDesktopItem {
     name = "matlab";
     desktopName = "MATLAB";
-    exec = "${matlabFHS}/bin/matlab-fhs -c matlab";
+    exec = "${matlabFHS}/bin/matlab-fhs -c \"matlab -desktop\"";
     icon = "${matlabIcon}";
     terminal = false;
     categories = ["Science" "Math"];
