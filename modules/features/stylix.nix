@@ -41,6 +41,7 @@
         lib,
         ...
       }: {
+        gtk.gtk4.theme = lib.mkDefault null;
         stylix.targets.firefox = lib.mkIf config.programs.firefox.enable {
           profileNames = ["default"];
           colors.enable = true;
