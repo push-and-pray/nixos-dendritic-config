@@ -14,6 +14,11 @@
     system.stateVersion = "25.11";
     hardware.facter.reportPath = ./facter.json;
 
+    services.udev.packages = with pkgs; [
+      platformio-core.udev
+      openocd
+    ];
+
     networking = {
       hostName = "zeus";
       interfaces = {
