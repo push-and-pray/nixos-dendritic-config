@@ -5,7 +5,11 @@
     ];
   };
 
-  flake.modules.nixos.ares = {config, ...}: {
+  flake.modules.nixos.ares = {
+    config,
+    pkgs,
+    ...
+  }: {
     nixpkgs.hostPlatform = "x86_64-linux";
     system.stateVersion = "25.05";
     hardware.facter.reportPath = ./facter.json;
@@ -20,8 +24,14 @@
       ];
     };
 
-    services.power-profiles-daemon.enable = true;
-    services.upower.enable = true;
+    services = {
+      udev.packages = with pkgs; [
+        platformio-core.udev
+        openocd
+      ];
+      power-profiles-daemon.enable = true;
+      upower.enable = true;
+    };
 
     # Boost startup speed
     virtualisation.docker.enableOnBoot = false;
