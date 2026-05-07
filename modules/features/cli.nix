@@ -38,6 +38,7 @@
         gemini-cli
         file
         unzip
+        jq
         inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.sam-ba
       ];
     };
