@@ -65,7 +65,7 @@
   symlinkJoin,
   makeDesktopItem,
   fetchurl,
-  matlabRoot ? "$HOME/.Matlab",
+  matlabRoot ? "$HOME/.matlab",
 }: let
   matlabFHS = buildFHSEnv {
     name = "matlab-fhs";
