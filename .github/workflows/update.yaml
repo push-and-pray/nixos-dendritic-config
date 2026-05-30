@@ -5,11 +5,20 @@ on:
   schedule:
     - cron: "0 0 * * 0"
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   nix-flake-update:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+    outputs:
+      committed: ${{ steps.commit.outputs.committed }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -21,6 +30,7 @@ jobs:
         run: nix flake update
 
       - name: Commit
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -30,6 +40,14 @@ jobs:
           if ! git diff-index --quiet HEAD; then
             git commit -m "chore: update flake.lock"
             git push
+            echo "committed=true" >> $GITHUB_OUTPUT
           else
             echo "No changes to flake.lock, skipping commit."
+            echo "committed=false" >> $GITHUB_OUTPUT
           fi
+
+  build:
+    needs: nix-flake-update
+    if: needs.nix-flake-update.outputs.committed == 'true'
+    uses: ./.github/workflows/nix.yaml
+    secrets: inherit

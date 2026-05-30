@@ -1,12 +1,7 @@
 name: "Build and Cache"
 on:
-  push:
-    branches: [main]
-    paths:
-      - "**.nix"
-      - "flake.lock"
-      - "**/facter.json"
-      - ".github/workflows/**"
+  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
