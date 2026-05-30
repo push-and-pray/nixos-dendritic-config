@@ -45,6 +45,8 @@
           ];
         };
       }
+
+      inputs.self.modules.homeManager.matlab
     ];
 
     imports = with inputs.self.modules.nixos; [
