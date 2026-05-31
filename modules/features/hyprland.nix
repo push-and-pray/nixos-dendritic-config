@@ -131,6 +131,7 @@
         wayland.windowManager.hyprland = {
           enable = true;
           systemd.enable = false;
+          configType = "hyprlang";
           settings = {
             monitor = lib.mkDefault ", preferred, auto, 1";
             input = {

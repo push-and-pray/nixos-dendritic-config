@@ -16,12 +16,10 @@
     networking.hostName = "ares";
 
     boot = {
+      kernelPackages = pkgs.linuxPackages_latest;
       # nixos-facter mislabels my ethernet device
       extraModulePackages = [config.boot.kernelPackages.yt6801];
       kernelModules = ["yt6801"];
-      kernelParams = [
-        "amd_pstate=active"
-      ];
     };
 
     services = {
