@@ -36,6 +36,7 @@
         wget
         dig
         gemini-cli
+        antigravity-cli
         file
         unzip
         jq
