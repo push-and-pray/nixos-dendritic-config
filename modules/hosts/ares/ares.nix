@@ -12,6 +12,14 @@
   }: {
     nixpkgs.hostPlatform = "x86_64-linux";
     nix.settings.system-features = ["gccarch-x86-64-v3" "nixos-test" "benchmark" "big-parallel" "kvm"];
+
+    swapDevices = [
+      {
+        device = "/var/lib/swapfile";
+        size = 32768; # 32 GiB
+      }
+    ];
+
     system.stateVersion = "25.05";
     hardware.facter.reportPath = ./facter.json;
     networking.hostName = "ares";
@@ -20,6 +28,7 @@
       # nixos-facter mislabels my ethernet device
       extraModulePackages = [config.boot.kernelPackages.yt6801];
       kernelModules = ["yt6801"];
+      zswap.enable = true;
     };
 
     services = {
