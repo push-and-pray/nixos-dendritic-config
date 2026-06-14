@@ -11,6 +11,7 @@
     ...
   }: {
     nixpkgs.hostPlatform = "x86_64-linux";
+    nix.settings.system-features = ["gccarch-x86-64-v3" "nixos-test" "benchmark" "big-parallel" "kvm"];
     system.stateVersion = "25.05";
     hardware.facter.reportPath = ./facter.json;
     networking.hostName = "ares";
