@@ -7,6 +7,9 @@
       tailscale = {
         services.tailscale.enable = true;
       };
+      ssh = {
+        services.openssh.enable = true;
+      };
       systemSvc = {
         imports = with inputs.self.modules.nixos; [
           diskManagement

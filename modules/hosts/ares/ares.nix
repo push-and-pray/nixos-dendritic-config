@@ -58,6 +58,7 @@
       dank
       homeManager
       tailscale
+      ssh
       libvirt
       stylix
       nix
