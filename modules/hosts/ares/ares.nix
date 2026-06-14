@@ -11,7 +11,31 @@
     ...
   }: {
     nixpkgs.hostPlatform = "x86_64-linux";
-    nix.settings.system-features = ["gccarch-x86-64-v3" "nixos-test" "benchmark" "big-parallel" "kvm"];
+    nix = {
+      buildMachines = [
+        # {
+        #   hostName = "pan";
+        #   protocol = "ssh-ng";
+        #   system = "x86_64-linux";
+        #   sshUser = "julius";
+        #   maxJobs = 2;
+        #   speedFactor = 1;
+        #   publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUF6aXpEeWVSVFB0bTY2dzZOaTFRdlpLUG9VZWdmaGgwaDcxK3pIYXRrWGIgcm9vdEBwYW4K";
+        #   supportedFeatures = ["gccarch-x86-64-v3" "nixos-test" "benchmark" "big-parallel" "kvm"];
+        # }
+      ];
+      # distributedBuilds = true;
+      settings = {
+        max-jobs = 1;
+        builders-use-substitutes = true;
+        system-features = ["gccarch-x86-64-v3" "nixos-test" "benchmark" "big-parallel" "kvm"];
+      };
+    };
+
+    programs.ssh.extraConfig = ''
+      Host pan
+        IdentityAgent /run/user/1000/gcr/ssh
+    '';
 
     swapDevices = [
       {
