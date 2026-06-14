@@ -10,7 +10,12 @@
     pkgs,
     ...
   }: {
-    nixpkgs.hostPlatform = "x86_64-linux";
+    nixpkgs.hostPlatform = {
+      system = "x86_64-linux";
+      gcc.arch = "x86-64-v3";
+      gcc.tune = "generic";
+    };
+
     system.stateVersion = "25.11";
     hardware.facter.reportPath = ./facter.json;
 
