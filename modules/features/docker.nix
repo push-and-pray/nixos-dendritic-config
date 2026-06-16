@@ -12,13 +12,5 @@
         "docker"
       ];
     };
-
-    home-manager.sharedModules = [
-      {
-        home.packages = with pkgs; [
-          podman-bootc
-        ];
-      }
-    ];
   };
 }

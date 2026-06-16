@@ -7,6 +7,7 @@
 
   flake.modules.nixos.hermes = {config, ...}: {
     nixpkgs.hostPlatform = "x86_64-linux";
+    nixpkgs.config.allowUnfree = true;
     system.stateVersion = "25.05";
     networking.hostName = "hermes";
 

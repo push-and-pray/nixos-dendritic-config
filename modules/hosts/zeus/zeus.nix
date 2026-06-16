@@ -56,7 +56,6 @@
       ssd
       nvidia
       docker
-      libvirt
       dank
       steam
       homeManager
