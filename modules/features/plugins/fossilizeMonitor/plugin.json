@@ -1,0 +1,11 @@
+{
+    "id": "fossilizeMonitor",
+    "name": "Fossilize Monitor",
+    "description": "Monitors Steam's Vulkan shader pre-caching progress",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "Julius",
+    "icon": "download",
+    "component": "./FossilizeMonitorWidget.qml",
+    "permissions": []
+}

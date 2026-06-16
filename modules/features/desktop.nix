@@ -22,6 +22,10 @@
             hash = "sha256-/155wFIotV9xiZzX9XRGs3ANjBcLJwS4kNDDNO6WkF0=";
           }}/DankPomodoroTimer";
         };
+        fossilizeMonitor = {
+          enable = true;
+          src = ./plugins/fossilizeMonitor;
+        };
       };
     };
   };
