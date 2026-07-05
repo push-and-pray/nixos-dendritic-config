@@ -13,6 +13,8 @@
     nixpkgs.hostPlatform = "x86_64-linux";
     nix.settings.system-features = ["gccarch-x86-64-v3" "nixos-test" "benchmark" "big-parallel" "kvm"];
 
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+
     swapDevices = [
       {
         device = "/var/lib/swapfile";
