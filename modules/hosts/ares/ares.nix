@@ -74,6 +74,7 @@
       stylix
       nix
       julius
+      hyprsunset
     ];
   };
 }
