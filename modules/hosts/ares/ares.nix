@@ -58,6 +58,11 @@
       inputs.self.modules.homeManager.matlab
     ];
 
+    programs.localsend = {
+      enable = true;
+      openFirewall = true;
+    };
+
     imports = with inputs.self.modules.nixos; [
       locale
       systemd-boot
