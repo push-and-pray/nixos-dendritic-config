@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  flake.modules.nixos.nix = {
+  flake.modules.nixos.nix = {pkgs, ...}: {
     imports = [
       inputs.determinate.nixosModules.default
     ];
@@ -39,5 +39,13 @@
       clean.extraArgs = "--keep-since 30d --keep 3";
       flake = "~/dev/nix/os/";
     };
+
+    home-manager.sharedModules = [
+      {
+        home.packages = with pkgs; [
+          attic-client
+        ];
+      }
+    ];
   };
 }
