@@ -32,6 +32,14 @@
         services.gnome.gnome-keyring.enable = true;
         programs.seahorse.enable = true;
 
+        nixpkgs.overlays = [
+          (final: prev: {
+            element-desktop = prev.element-desktop.override {
+              commandLineArgs = "--password-store=\"gnome-libsecret\"";
+            };
+          })
+        ];
+
         home-manager.sharedModules = [
           {
             home.file.".vscode/argv.json".text = builtins.toJSON {

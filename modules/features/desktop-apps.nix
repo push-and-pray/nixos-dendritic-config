@@ -3,6 +3,7 @@
     desktop-apps = {
       imports = with inputs.self.modules.homeManager; [
         spotify
+        element
         firefox
         vscode
         kitty
@@ -17,6 +18,9 @@
     };
     spotify = {pkgs, ...}: {
       home.packages = with pkgs; [spotify];
+    };
+    element = {pkgs, ...}: {
+      home.packages = with pkgs; [element-desktop];
     };
     kicad = {pkgs, ...}: {
       home.packages = with pkgs; [kicad];
