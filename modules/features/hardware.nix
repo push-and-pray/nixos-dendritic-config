@@ -10,7 +10,7 @@
         nvidia = {
           open = true;
           modesetting.enable = true;
-          powerManagement.enable = true;
+          powerManagement.enable = false;
         };
         nvidia-container-toolkit.enable = true;
       };
