@@ -14,10 +14,15 @@
         kicad
         moonlight
         obsidian
+        jellyfin-client
       ];
     };
     spotify = {pkgs, ...}: {
       home.packages = with pkgs; [spotify];
+    };
+
+    jellyfin-client = {pkgs, ...}: {
+      home.packages = with pkgs; [jellyfin-desktop];
     };
     element = {pkgs, ...}: {
       home.packages = with pkgs; [element-desktop];
