@@ -23,11 +23,17 @@ jobs:
       - uses: actions/checkout@v6
         with:
           token: ${{ secrets.PAT }} # To allow update to trigger other workflows
+
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: cachix/cachix-action@v17
+        with:
+          name: push-and-pray-config
+
       - name: Update flake.lock
-        run: nix flake update
+        run: nix flake update --accept-flake-config
 
       - name: Commit
         id: commit
