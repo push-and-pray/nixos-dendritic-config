@@ -47,11 +47,18 @@
         enable = true;
       };
     };
-    kitty = {
+    kitty = {lib, ...}: {
       programs.kitty = {
         enable = true;
       };
-      wayland.windowManager.hyprland.settings.bind = ["SUPER, return, exec, kitty"];
+      wayland.windowManager.hyprland.settings.bind = [
+        {
+          _args = [
+            "SUPER + return"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"kitty\")")
+          ];
+        }
+      ];
     };
     signal = {pkgs, ...}: {
       home.packages = with pkgs; [signal-desktop];

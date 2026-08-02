@@ -35,9 +35,13 @@
     home-manager.sharedModules = [
       {
         wayland.windowManager.hyprland.settings = {
-          workspace = [
-            "2,monitor:DP-1"
-            "1,monitor:HDMI-A-2"
+          monitor = [
+            (pkgs.lib.generators.mkLuaInline "{ output = \"DP-1\", mode = \"2560x1440@143.972\", position = \"0x0\", scale = 1, vrr = 1, bitdepth = 10 }")
+            (pkgs.lib.generators.mkLuaInline "{ output = \"HDMI-A-2\", mode = \"2560x1440@144.006\", position = \"-1440x-720\", transform = 1, scale = 1, vrr = 1, bitdepth = 10 }")
+          ];
+          workspace_rule = [
+            (pkgs.lib.generators.mkLuaInline "{ workspace = \"2\", monitor = \"DP-1\" }")
+            (pkgs.lib.generators.mkLuaInline "{ workspace = \"1\", monitor = \"HDMI-A-2\" }")
           ];
         };
       }

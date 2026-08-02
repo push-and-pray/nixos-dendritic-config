@@ -1,5 +1,9 @@
 {inputs, ...}: {
-  flake.modules.nixos.dank = {pkgs, ...}: {
+  flake.modules.nixos.dank = {
+    pkgs,
+    lib,
+    ...
+  }: {
     imports = with inputs.self.modules.nixos; [hyprland network keyring];
     home-manager.sharedModules = with inputs.self.modules.homeManager; [desktop-apps fonts cli dank];
 
@@ -39,32 +43,102 @@
         font-awesome
       ];
     };
-    dank = {
+    dank = {lib, ...}: {
       home.pointerCursor.enable = true;
       wayland.windowManager.hyprland = {
         settings = {
           bind = [
-            "SUPER, space, exec, dms ipc call spotlight toggle"
-            "SUPER, V, exec, dms ipc call clipboard toggle"
-            "SUPER, comma, exec, dms ipc call settings focusOrToggle"
-            "SUPER, N, exec, dms ipc call notifications toggle"
-            "SUPER, P, exec, dms ipc call powermenu toggle"
-            "SUPER, L, exec, dms ipc call lock lock"
-          ];
-          bindel = [
-            ",XF86MonBrightnessUp, exec, dms ipc call brightness increment 5"
-            ",XF86MonBrightnessDown, exec, dms ipc call brightness decrement 5"
-            ",XF86AudioRaiseVolume, exec, dms ipc call audio increment 3"
-            ",XF86AudioLowerVolume, exec, dms ipc call audio decrement 3"
-          ];
-          bindl = [
-            ",XF86AudioMute, exec, dms ipc call audio mute"
+            {
+              _args = [
+                "SUPER + space"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call spotlight toggle\")")
+              ];
+            }
+            {
+              _args = [
+                "SUPER + V"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call clipboard toggle\")")
+              ];
+            }
+            {
+              _args = [
+                "SUPER + comma"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call settings focusOrToggle\")")
+              ];
+            }
+            {
+              _args = [
+                "SUPER + N"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call notifications toggle\")")
+              ];
+            }
+            {
+              _args = [
+                "SUPER + P"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call powermenu toggle\")")
+              ];
+            }
+            {
+              _args = [
+                "SUPER + L"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call lock lock\")")
+              ];
+            }
+
+            {
+              _args = [
+                "XF86MonBrightnessUp"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call brightness increment 5\")")
+                {
+                  locked = true;
+                  repeating = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                "XF86MonBrightnessDown"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call brightness decrement 5\")")
+                {
+                  locked = true;
+                  repeating = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                "XF86AudioRaiseVolume"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call audio increment 3\")")
+                {
+                  locked = true;
+                  repeating = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                "XF86AudioLowerVolume"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call audio decrement 3\")")
+                {
+                  locked = true;
+                  repeating = true;
+                }
+              ];
+            }
+            {
+              _args = [
+                "XF86AudioMute"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call audio mute\")")
+                {locked = true;}
+              ];
+            }
           ];
         };
         extraConfig = ''
-          source = ~/.config/hypr/dms/colors.conf
-          source = ~/.config/hypr/dms/layout.conf
-          source = ~/.config/hypr/dms/outputs.conf
+          pcall(require, "dms.colors")
+          pcall(require, "dms.layout")
+          pcall(require, "dms.outputs")
+          pcall(require, "dms.windowrules")
         '';
       };
     };
