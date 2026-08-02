@@ -14,6 +14,12 @@
     system.stateVersion = "25.11";
     hardware.facter.reportPath = ./facter.json;
 
+    nix.settings = {
+      system-features = ["uid-range"];
+      experimental-features = ["auto-allocate-uids" "cgroups"];
+      auto-allocate-uids = true;
+    };
+
     services.udev.packages = with pkgs; [
       platformio-core.udev
       openocd
