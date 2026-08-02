@@ -40,6 +40,7 @@
       ];
     };
     dank = {
+      home.pointerCursor.enable = true;
       wayland.windowManager.hyprland = {
         settings = {
           bind = [
