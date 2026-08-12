@@ -36,6 +36,7 @@
         wget
         dig
         antigravity-cli
+        claude-code
         file
         unzip
         jq
