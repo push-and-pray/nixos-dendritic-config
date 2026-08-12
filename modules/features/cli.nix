@@ -94,27 +94,28 @@
         '';
       };
     in {
-      programs.git = {
-        enable = true;
+      programs = {
+        gh = {
+          enable = true;
+        };
+        git = {
+          enable = true;
 
-        settings = {
-          alias = {
-            ls = "!${gls-script}/bin/git-gls";
-          };
-          user = {
-            email = "62392537+push-and-pray@users.noreply.github.com";
-            name = "push-and-pray";
-          };
-          pull = {
-            rebase = true;
+          settings = {
+            alias = {
+              ls = "!${gls-script}/bin/git-gls";
+            };
+            user = {
+              email = "62392537+push-and-pray@users.noreply.github.com";
+              name = "push-and-pray";
+            };
+            pull = {
+              rebase = true;
+            };
           };
         };
+        lazygit.enable = true;
       };
-
-      home.packages = with pkgs; [
-        git-extras
-      ];
-      programs.lazygit.enable = true;
     };
 
     direnv = {
