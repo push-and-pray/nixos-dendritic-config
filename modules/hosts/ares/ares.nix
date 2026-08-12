@@ -50,7 +50,7 @@
       {
         wayland.windowManager.hyprland.settings = {
           monitor = [
-            ",preferred,auto,1.6"
+            (pkgs.lib.generators.mkLuaInline "{ output = \"\", mode = \"preferred\", position = \"auto\", scale = 1.6 }")
           ];
         };
       }
