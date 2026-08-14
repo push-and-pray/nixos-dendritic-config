@@ -1,6 +1,14 @@
 {inputs, ...}: {
   flake.modules = {
     nixos = {
+      yubi = {pkgs, ...}: {
+        # ssh-keygen -t ed25519-sk -O resident -C "julius@zeus"
+        services.udev.packages = [pkgs.libfido2];
+        environment.systemPackages = [pkgs.yubikey-manager];
+        services.gnome.gcr-ssh-agent.enable = false;
+        programs.ssh.startAgent = true;
+        programs.yubikey-touch-detector.enable = true;
+      };
       twingate = {
         services.twingate.enable = true;
       };

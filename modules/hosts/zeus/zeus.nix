@@ -70,6 +70,7 @@
       steam
       homeManager
       tailscale
+      yubi
       stylix
       nix
       julius
