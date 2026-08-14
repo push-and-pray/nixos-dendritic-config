@@ -9,7 +9,7 @@ in {
 
     users.users.${user} = {
       isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager" "docker" "video" "i2c"];
+      extraGroups = ["wheel" "networkmanager" "docker" "video" "i2c" "tss"];
     };
 
     home-manager.users.${user} = {
