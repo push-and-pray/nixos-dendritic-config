@@ -71,6 +71,7 @@
       homeManager
       tailscale
       yubi
+      tpm
       stylix
       nix
       julius

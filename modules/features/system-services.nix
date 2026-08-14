@@ -9,6 +9,17 @@
         programs.ssh.startAgent = true;
         programs.yubikey-touch-detector.enable = true;
       };
+
+      tpm = {
+        # ssh-tpm-keygen -t ecdsa -C "julius@zeus"
+        security.tpm2.enable = true;
+        services.gnome.gcr-ssh-agent.enable = false;
+        programs.ssh.startAgent = true;
+
+        home-manager.sharedModules = [
+          inputs.self.modules.homeManager.tpm
+        ];
+      };
       twingate = {
         services.twingate.enable = true;
       };
@@ -86,6 +97,21 @@
     };
 
     homeManager = {
+      tpm = {osConfig, ...}: {
+        # -A chains to openssh's agent, so this one socket serves both
+        # tpm and sk keys.
+        services.ssh-tpm-agent = {
+          enable = true;
+          extraArgs = ["-A" "%t/ssh-agent"];
+        };
+
+        # ssh-tpm-agent only probes hardcoded /usr askpass paths, so without
+        # this it can't prompt for the key passphrase and refuses to sign.
+        systemd.user.services.ssh-tpm-agent.Service.Environment = [
+          "SSH_ASKPASS=${osConfig.programs.ssh.askPassword}"
+        ];
+      };
+
       diskManagement = {
         services.udiskie.enable = true;
       };
