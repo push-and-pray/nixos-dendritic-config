@@ -1,0 +1,5 @@
+require("mini.pairs").setup()
+require("mini.surround").setup()
+require("mini.icons").setup()
+MiniIcons.mock_nvim_web_devicons()
+require("mini.statusline").setup({ use_icons = true })
