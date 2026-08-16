@@ -4,7 +4,7 @@
       imports = with inputs.self.modules.homeManager; [
         devops
         utils
-        nixvim
+        neovim
         git
         direnv
         nix-index
@@ -44,16 +44,6 @@
         inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.sam-ba
       ];
     };
-    nixvim = {pkgs, ...}: {
-      home.packages = [
-        inputs.nixvim.packages.${pkgs.stdenv.hostPlatform.system}.default
-      ];
-      home.sessionVariables = {
-        EDITOR = "nvim";
-        SUDO_EDITOR = "nvim";
-      };
-    };
-
     git = {pkgs, ...}: let
       gls-script = pkgs.writeShellApplication {
         name = "git-gls";
