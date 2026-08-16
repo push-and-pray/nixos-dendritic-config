@@ -37,6 +37,7 @@
         dig
         antigravity-cli
         claude-code
+        codex
         file
         unzip
         jq
