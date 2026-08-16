@@ -12,7 +12,6 @@
         surfer
         drawio
         kicad
-        moonlight
         obsidian
         jellyfin-client
       ];
@@ -71,9 +70,6 @@
     };
     drawio = {pkgs, ...}: {
       home.packages = with pkgs; [drawio];
-    };
-    moonlight = {pkgs, ...}: {
-      home.packages = with pkgs; [moonlight-qt];
     };
     obsidian = {pkgs, ...}: {
       home.packages = with pkgs; [obsidian];
