@@ -41,9 +41,9 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "Atmel SAM-BA In-System Programmer";
     homepage = "https://github.com/atmelcorp/sam-ba";
-    sourceProvenance = with sourceTypes; [binaryNativeCode];
+    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     license = licenses.bsd3;
-    platforms = ["x86_64-linux"];
+    platforms = [ "x86_64-linux" ];
     mainProgram = "sam-ba";
   };
 }

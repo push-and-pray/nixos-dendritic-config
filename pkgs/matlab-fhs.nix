@@ -66,7 +66,8 @@
   makeDesktopItem,
   fetchurl,
   matlabRoot ? "$HOME/.matlab",
-}: let
+}:
+let
   matlabFHS = buildFHSEnv {
     name = "matlab-fhs";
 
@@ -170,11 +171,17 @@
     exec = "${matlabFHS}/bin/matlab-fhs -c \"matlab -desktop\"";
     icon = "${matlabIcon}";
     terminal = false;
-    categories = ["Science" "Math"];
+    categories = [
+      "Science"
+      "Math"
+    ];
     comment = "Scientific computing environment";
   };
 in
-  symlinkJoin {
-    name = "matlab-desktop-env";
-    paths = [matlabFHS desktopItem];
-  }
+symlinkJoin {
+  name = "matlab-desktop-env";
+  paths = [
+    matlabFHS
+    desktopItem
+  ];
+}

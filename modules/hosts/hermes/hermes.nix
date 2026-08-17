@@ -1,11 +1,11 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   flake.nixosConfigurations.hermes = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       inputs.self.modules.nixos.hermes
     ];
   };
 
-  flake.modules.nixos.hermes = {config, ...}: {
+  flake.modules.nixos.hermes = { config, ... }: {
     nixpkgs.hostPlatform = "x86_64-linux";
     nixpkgs.config.allowUnfree = true;
     system.stateVersion = "26.05";

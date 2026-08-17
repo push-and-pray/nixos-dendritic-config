@@ -20,7 +20,7 @@ buildGoModule rec {
 
   vendorHash = null;
 
-  nativeBuildInputs = [makeWrapper];
+  nativeBuildInputs = [ makeWrapper ];
 
   ldflags = [
     "-w"
@@ -36,11 +36,13 @@ buildGoModule rec {
   postInstall = ''
     mv $out/bin/elemental-toolkit $out/bin/elemental
     wrapProgram $out/bin/elemental \
-      --prefix PATH : ${lib.makeBinPath [
-      squashfsTools
-      libisoburn
-      grub2
-    ]}
+      --prefix PATH : ${
+        lib.makeBinPath [
+          squashfsTools
+          libisoburn
+          grub2
+        ]
+      }
   '';
 
   doCheck = false;

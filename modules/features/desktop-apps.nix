@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   flake.modules.homeManager = {
     desktop-apps = {
       imports = with inputs.self.modules.homeManager; [
@@ -16,18 +16,18 @@
         jellyfin-client
       ];
     };
-    spotify = {pkgs, ...}: {
-      home.packages = with pkgs; [spotify];
+    spotify = { pkgs, ... }: {
+      home.packages = with pkgs; [ spotify ];
     };
 
-    jellyfin-client = {pkgs, ...}: {
-      home.packages = with pkgs; [jellyfin-desktop];
+    jellyfin-client = { pkgs, ... }: {
+      home.packages = with pkgs; [ jellyfin-desktop ];
     };
-    element = {pkgs, ...}: {
-      home.packages = with pkgs; [element-desktop];
+    element = { pkgs, ... }: {
+      home.packages = with pkgs; [ element-desktop ];
     };
-    kicad = {pkgs, ...}: {
-      home.packages = with pkgs; [kicad];
+    kicad = { pkgs, ... }: {
+      home.packages = with pkgs; [ kicad ];
     };
     firefox = {
       programs.firefox = {
@@ -46,7 +46,7 @@
         enable = true;
       };
     };
-    kitty = {lib, ...}: {
+    kitty = { lib, ... }: {
       programs.kitty = {
         enable = true;
       };
@@ -59,22 +59,22 @@
         }
       ];
     };
-    signal = {pkgs, ...}: {
-      home.packages = with pkgs; [signal-desktop];
+    signal = { pkgs, ... }: {
+      home.packages = with pkgs; [ signal-desktop ];
     };
-    discord = {pkgs, ...}: {
-      home.packages = with pkgs; [vesktop];
+    discord = { pkgs, ... }: {
+      home.packages = with pkgs; [ vesktop ];
     };
-    surfer = {pkgs, ...}: {
-      home.packages = with pkgs; [surfer];
+    surfer = { pkgs, ... }: {
+      home.packages = with pkgs; [ surfer ];
     };
-    drawio = {pkgs, ...}: {
-      home.packages = with pkgs; [drawio];
+    drawio = { pkgs, ... }: {
+      home.packages = with pkgs; [ drawio ];
     };
-    obsidian = {pkgs, ...}: {
-      home.packages = with pkgs; [obsidian];
+    obsidian = { pkgs, ... }: {
+      home.packages = with pkgs; [ obsidian ];
     };
-    matlab = {pkgs, ...}: {
+    matlab = { pkgs, ... }: {
       home.packages = [
         inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.matlab
       ];

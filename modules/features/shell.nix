@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   flake.modules.homeManager.zsh = {
     programs = {
       zsh = {
@@ -19,12 +19,12 @@
   };
 
   flake.lib = {
-    zsh = username: {pkgs, ...}: {
+    zsh = username: { pkgs, ... }: {
       programs.zsh.enable = true;
       users.users.${username}.shell = pkgs.zsh;
 
       home-manager.users.${username} = {
-        imports = [inputs.self.modules.homeManager.zsh];
+        imports = [ inputs.self.modules.homeManager.zsh ];
       };
     };
   };

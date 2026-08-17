@@ -25,7 +25,7 @@ require("lz.n").load({
 				json = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
 				markdown = { "prettierd", "prettier", stop_after_first = true },
-				nix = { "alejandra" },
+				nix = { "nixfmt" },
 				python = { "ruff_organize_imports", "ruff_format" },
 				rust = { "rustfmt" },
 				sbt = { "scalafmt" },

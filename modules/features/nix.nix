@@ -1,5 +1,5 @@
-{inputs, ...}: {
-  flake.modules.nixos.nix = {pkgs, ...}: {
+{ inputs, ... }: {
+  flake.modules.nixos.nix = { pkgs, ... }: {
     nix.settings = {
       substituters = [
         "https://cache.nixos.org?priority=10"

@@ -1,41 +1,54 @@
-{inputs, ...}: {
-  flake.modules.nixos.dank = {
-    pkgs,
-    lib,
-    ...
-  }: {
-    imports = with inputs.self.modules.nixos; [hyprland network keyring];
-    home-manager.sharedModules = with inputs.self.modules.homeManager; [desktop-apps fonts cli dank];
+{ inputs, ... }: {
+  flake.modules.nixos.dank =
+    {
+      pkgs,
+      lib,
+      ...
+    }:
+    {
+      imports = with inputs.self.modules.nixos; [
+        hyprland
+        network
+        keyring
+      ];
+      home-manager.sharedModules = with inputs.self.modules.homeManager; [
+        desktop-apps
+        fonts
+        cli
+        dank
+      ];
 
-    environment.systemPackages = with pkgs; [
-      libnotify
-      qt6.qtmultimedia
-    ];
+      environment.systemPackages = with pkgs; [
+        libnotify
+        qt6.qtmultimedia
+      ];
 
-    programs.dms-shell = {
-      enable = true;
-      enableCalendarEvents = false;
-      enableDynamicTheming = false;
-      plugins = {
-        dankPomodoroTimer = {
-          enable = true;
-          src = "${pkgs.fetchFromGitHub {
-            owner = "AvengeMedia";
-            repo = "dms-plugins";
-            rev = "master";
-            hash = "sha256-/155wFIotV9xiZzX9XRGs3ANjBcLJwS4kNDDNO6WkF0=";
-          }}/DankPomodoroTimer";
-        };
-        fossilizeMonitor = {
-          enable = true;
-          src = ./plugins/fossilizeMonitor;
+      programs.dms-shell = {
+        enable = true;
+        enableCalendarEvents = false;
+        enableDynamicTheming = false;
+        plugins = {
+          dankPomodoroTimer = {
+            enable = true;
+            src = "${
+              pkgs.fetchFromGitHub {
+                owner = "AvengeMedia";
+                repo = "dms-plugins";
+                rev = "master";
+                hash = "sha256-/155wFIotV9xiZzX9XRGs3ANjBcLJwS4kNDDNO6WkF0=";
+              }
+            }/DankPomodoroTimer";
+          };
+          fossilizeMonitor = {
+            enable = true;
+            src = ./plugins/fossilizeMonitor;
+          };
         };
       };
     };
-  };
 
   flake.modules.homeManager = {
-    fonts = {pkgs, ...}: {
+    fonts = { pkgs, ... }: {
       home.packages = with pkgs; [
         adwaita-icon-theme
         noto-fonts
@@ -43,7 +56,7 @@
         font-awesome
       ];
     };
-    dank = {lib, ...}: {
+    dank = { lib, ... }: {
       home.pointerCursor.enable = true;
       wayland.windowManager.hyprland = {
         settings = {
@@ -129,7 +142,7 @@
               _args = [
                 "XF86AudioMute"
                 (lib.generators.mkLuaInline "hl.dsp.exec_cmd(\"dms ipc call audio mute\")")
-                {locked = true;}
+                { locked = true; }
               ];
             }
           ];

@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   flake.modules.homeManager = {
     cli = {
       imports = with inputs.self.modules.homeManager; [
@@ -19,7 +19,7 @@
       programs.nix-index.enable = true;
     };
 
-    devops = {pkgs, ...}: {
+    devops = { pkgs, ... }: {
       home.packages = with pkgs; [
         kubectl
         kubelogin-oidc
@@ -30,7 +30,7 @@
         inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.elemental
       ];
     };
-    utils = {pkgs, ...}: {
+    utils = { pkgs, ... }: {
       home.packages = with pkgs; [
         curl
         wget
@@ -44,71 +44,78 @@
         inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.sam-ba
       ];
     };
-    git = {pkgs, ...}: let
-      gls-script = pkgs.writeShellApplication {
-        name = "git-gls";
-        runtimeInputs = with pkgs; [git util-linux gawk];
-        text = ''
-          if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-            echo "Not a git repository."
-            exit 1
-          fi
+    git =
+      { pkgs, ... }:
+      let
+        gls-script = pkgs.writeShellApplication {
+          name = "git-gls";
+          runtimeInputs = with pkgs; [
+            git
+            util-linux
+            gawk
+          ];
+          text = ''
+            if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+              echo "Not a git repository."
+              exit 1
+            fi
 
-          shopt -s dotglob
+            shopt -s dotglob
 
-          {
-            echo "NAME|LAST MODIFIED|MESSAGE"
+            {
+              echo "NAME|LAST MODIFIED|MESSAGE"
 
-            for file in *; do
-              [ -e "$file" ] || continue
+              for file in *; do
+                [ -e "$file" ] || continue
 
-              [ "$file" = ".git" ] && continue
+                [ "$file" = ".git" ] && continue
 
-              if [ -d "$file" ]; then
-                display_name="$file/"
-              else
-                display_name="$file"
-              fi
+                if [ -d "$file" ]; then
+                  display_name="$file/"
+                else
+                  display_name="$file"
+                fi
 
-              if git status --porcelain -- "$file" 2>/dev/null | grep -q "^"; then
-                display_name="*$display_name"
-              fi
+                if git status --porcelain -- "$file" 2>/dev/null | grep -q "^"; then
+                  display_name="*$display_name"
+                fi
 
-              info=$(git log -1 --format="%ar|%s" -- "$file" 2>/dev/null)
+                info=$(git log -1 --format="%ar|%s" -- "$file" 2>/dev/null)
 
-              if [ -n "$info" ]; then
-                echo "$display_name|$info"
-              else
-                echo "$display_name|-|*"
-              fi
-            done
-          } | column -s "|" -t | awk 'NR==1{print "\033[1;4m" $0 "\033[0m"; next} {print}'
-        '';
-      };
-    in {
-      programs = {
-        gh = {
-          enable = true;
+                if [ -n "$info" ]; then
+                  echo "$display_name|$info"
+                else
+                  echo "$display_name|-|*"
+                fi
+              done
+            } | column -s "|" -t | awk 'NR==1{print "\033[1;4m" $0 "\033[0m"; next} {print}'
+          '';
         };
-        git = {
-          enable = true;
+      in
+      {
+        programs = {
+          gh = {
+            enable = true;
+          };
+          git = {
+            enable = true;
 
-          settings = {
-            alias = {
-              ls = "!${gls-script}/bin/git-gls";
-            };
-            user = {
-              email = "62392537+push-and-pray@users.noreply.github.com";
-              name = "push-and-pray";
-            };
-            pull = {
-              rebase = true;
+            settings = {
+              alias = {
+                ls = "!${gls-script}/bin/git-gls";
+              };
+              user = {
+                email = "62392537+push-and-pray@users.noreply.github.com";
+                name = "push-and-pray";
+              };
+              pull = {
+                rebase = true;
+              };
             };
           };
+          lazygit.enable = true;
         };
-        lazygit.enable = true;
       };
-    };
 
     direnv = {
       programs = {

@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   flake.modules.nixos = {
     intel = {
       imports = with inputs.self.modules.nixos; [

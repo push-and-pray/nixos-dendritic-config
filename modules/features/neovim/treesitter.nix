@@ -1,8 +1,8 @@
 _: {
-  flake.modules.homeManager.neovim = {pkgs, ...}: {
+  flake.modules.homeManager.neovim = { pkgs, ... }: {
     programs.neovim.plugins = [
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins (parsers:
-        with parsers; [
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (
+        parsers: with parsers; [
           bash
           c
           go
@@ -19,7 +19,8 @@ _: {
           vimdoc
           yaml
           zig
-        ]))
+        ]
+      ))
     ];
     xdg.configFile."nvim/plugin/treesitter.lua".source = ./treesitter.lua;
   };

@@ -1,10 +1,12 @@
 _: {
-  flake.modules.nixos.steam = {pkgs, ...}: {
+  flake.modules.nixos.steam = { pkgs, ... }: {
     programs = {
       gamemode = {
         enable = true;
         settings = {
-          general = {renice = 10;};
+          general = {
+            renice = 10;
+          };
           gpu = {
             apply_gpu_optimisations = "accept-responsibility";
             gpu_device = 0;
@@ -17,16 +19,23 @@ _: {
         enable = true;
       };
       steam = {
-        dedicatedServer = {openFirewall = true;};
+        dedicatedServer = {
+          openFirewall = true;
+        };
         enable = true;
         extraCompatPackages = with pkgs; [
           proton-ge-bin
         ];
         gamescopeSession = {
-          args = ["-O" "DP-1"];
+          args = [
+            "-O"
+            "DP-1"
+          ];
           enable = true;
         };
-        remotePlay = {openFirewall = true;};
+        remotePlay = {
+          openFirewall = true;
+        };
       };
     };
 

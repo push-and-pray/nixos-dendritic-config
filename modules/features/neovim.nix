@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.neovim = {pkgs, ...}: {
+  flake.modules.homeManager.neovim = { pkgs, ... }: {
     stylix.targets.neovim.enable = false;
 
     home.sessionVariables = {
@@ -12,7 +12,7 @@ _: {
       enable = true;
       defaultEditor = true;
       initLua = builtins.readFile ./neovim/init.lua;
-      plugins = [pkgs.vimPlugins.lz-n];
+      plugins = [ pkgs.vimPlugins.lz-n ];
       withNodeJs = false;
       withPython3 = false;
       withRuby = false;
