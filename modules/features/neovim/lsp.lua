@@ -80,6 +80,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		if client:supports_method("textDocument/inlayHint") then
 			vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
 		end
+		if client:supports_method("textDocument/codeLens") then
+			vim.lsp.codelens.refresh({ bufnr = args.buf })
+			vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+				group = vim.api.nvim_create_augroup("julius-lsp-codelens", { clear = false }),
+				buffer = args.buf,
+				callback = function()
+					vim.lsp.codelens.refresh({ bufnr = args.buf })
+				end,
+			})
+		end
 	end,
 })
 
@@ -94,6 +104,8 @@ end, { desc = "Next diagnostic" })
 map("n", "<leader>e,", function()
 	vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Previous diagnostic" })
+map({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+map("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
 
 require("lz.n").load({
 	"fidget.nvim",
