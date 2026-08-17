@@ -1,6 +1,6 @@
 {
   flake.modules.nixos = {
-    libvirt = {pkgs, ...}: {
+    libvirt = { pkgs, ... }: {
       virtualisation.libvirtd = {
         enable = true;
         qemu = {
@@ -13,7 +13,7 @@
       programs.virt-manager.enable = true;
 
       users.users.julius = {
-        extraGroups = ["libvirtd"];
+        extraGroups = [ "libvirtd" ];
       };
 
       home-manager.sharedModules = [

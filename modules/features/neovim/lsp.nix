@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.neovim = {pkgs, ...}: {
+  flake.modules.homeManager.neovim = { pkgs, ... }: {
     programs.neovim.plugins = with pkgs.vimPlugins; [
       blink-cmp
       friendly-snippets

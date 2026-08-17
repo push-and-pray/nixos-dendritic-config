@@ -1,9 +1,9 @@
 _: {
-  perSystem = {pkgs, ...}: {
+  perSystem = { pkgs, ... }: {
     packages = {
-      elemental = pkgs.callPackage ../../pkgs/elemental.nix {};
-      sam-ba = pkgs.callPackage ../../pkgs/sam-ba.nix {};
-      matlab = pkgs.callPackage ../../pkgs/matlab-fhs.nix {};
+      elemental = pkgs.callPackage ../../pkgs/elemental.nix { };
+      sam-ba = pkgs.callPackage ../../pkgs/sam-ba.nix { };
+      matlab = pkgs.callPackage ../../pkgs/matlab-fhs.nix { };
     };
   };
 }

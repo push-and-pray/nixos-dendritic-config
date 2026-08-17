@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.neovim = {pkgs, ...}: {
+  flake.modules.homeManager.neovim = { pkgs, ... }: {
     programs.neovim = {
       extraPackages = with pkgs; [
         fd
@@ -7,7 +7,7 @@ _: {
         ripgrep
         xdg-utils
       ];
-      plugins = [pkgs.vimPlugins.snacks-nvim];
+      plugins = [ pkgs.vimPlugins.snacks-nvim ];
     };
     xdg.configFile."nvim/plugin/snacks.lua".source = ./snacks.lua;
   };

@@ -1,8 +1,8 @@
-{lib, ...}: {
+{ lib, ... }: {
   options = {
     flake.lib = lib.mkOption {
       type = lib.types.lazyAttrsOf lib.types.raw;
-      default = {};
+      default = { };
       description = "Shared library functions and factories.";
     };
   };

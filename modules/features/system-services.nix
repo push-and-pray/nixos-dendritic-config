@@ -1,10 +1,10 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   flake.modules = {
     nixos = {
-      yubi = {pkgs, ...}: {
+      yubi = { pkgs, ... }: {
         # ssh-keygen -t ed25519-sk -O resident -C "julius@zeus"
-        services.udev.packages = [pkgs.libfido2];
-        environment.systemPackages = [pkgs.yubikey-manager];
+        services.udev.packages = [ pkgs.libfido2 ];
+        environment.systemPackages = [ pkgs.yubikey-manager ];
         services.gnome.gcr-ssh-agent.enable = false;
         programs.ssh.startAgent = true;
         programs.yubikey-touch-detector.enable = true;
@@ -47,7 +47,7 @@
         ];
       };
 
-      keyring = {pkgs, ...}: {
+      keyring = { pkgs, ... }: {
         services.gnome.gnome-keyring.enable = true;
         programs.seahorse.enable = true;
 
@@ -97,12 +97,15 @@
     };
 
     homeManager = {
-      tpm = {osConfig, ...}: {
+      tpm = { osConfig, ... }: {
         # -A chains to openssh's agent, so this one socket serves both
         # tpm and sk keys.
         services.ssh-tpm-agent = {
           enable = true;
-          extraArgs = ["-A" "%t/ssh-agent"];
+          extraArgs = [
+            "-A"
+            "%t/ssh-agent"
+          ];
         };
 
         # ssh-tpm-agent only probes hardcoded /usr askpass paths, so without

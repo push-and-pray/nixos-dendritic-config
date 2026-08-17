@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.mako = {pkgs, ...}: {
+  flake.modules.homeManager.mako = { pkgs, ... }: {
     services.mako = {
       enable = true;
       settings = {

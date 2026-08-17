@@ -8,11 +8,14 @@
     fileSystems."/boot" = {
       device = "/dev/disk/by-uuid/F155-1F67";
       fsType = "vfat";
-      options = ["fmask=0077" "dmask=0077"];
+      options = [
+        "fmask=0077"
+        "dmask=0077"
+      ];
     };
 
     swapDevices = [
-      {device = "/dev/disk/by-uuid/74776a97-c77d-4752-8dab-920fadbcbdff";}
+      { device = "/dev/disk/by-uuid/74776a97-c77d-4752-8dab-920fadbcbdff"; }
     ];
   };
 }

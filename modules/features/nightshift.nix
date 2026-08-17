@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   flake.modules = {
     nixos = {
       nightShiftDdc = {
@@ -52,7 +52,7 @@
           };
         };
       };
-      gammastepDdcHook = {pkgs, ...}: {
+      gammastepDdcHook = { pkgs, ... }: {
         xdg.configFile."gammastep/hooks/dimmer.sh" = {
           executable = true;
           source = pkgs.writeShellScript "dimmer_hook" ''

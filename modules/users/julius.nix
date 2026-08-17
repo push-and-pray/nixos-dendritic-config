@@ -1,7 +1,9 @@
-{inputs, ...}: let
+{ inputs, ... }:
+let
   user = "julius";
   inherit (inputs.self.lib) zsh;
-in {
+in
+{
   flake.modules.nixos.julius = {
     imports = [
       (zsh user)
@@ -9,7 +11,14 @@ in {
 
     users.users.${user} = {
       isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager" "docker" "video" "i2c" "tss"];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+        "video"
+        "i2c"
+        "tss"
+      ];
     };
 
     home-manager.users.${user} = {

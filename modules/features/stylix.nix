@@ -1,5 +1,5 @@
-{inputs, ...}: {
-  flake.modules.nixos.stylix = {pkgs, ...}: {
+{ inputs, ... }: {
+  flake.modules.nixos.stylix = { pkgs, ... }: {
     imports = [
       inputs.stylix.nixosModules.stylix
     ];
@@ -36,21 +36,23 @@
       };
     };
     home-manager.sharedModules = [
-      ({
-        config,
-        lib,
-        ...
-      }: {
-        gtk.gtk4.theme = lib.mkDefault null;
-        stylix.targets.firefox = lib.mkIf config.programs.firefox.enable {
-          profileNames = ["default"];
-          colors.enable = true;
-          firefoxGnomeTheme.enable = true;
-        };
+      (
+        {
+          config,
+          lib,
+          ...
+        }:
+        {
+          gtk.gtk4.theme = lib.mkDefault null;
+          stylix.targets.firefox = lib.mkIf config.programs.firefox.enable {
+            profileNames = [ "default" ];
+            colors.enable = true;
+            firefoxGnomeTheme.enable = true;
+          };
 
-        stylix.targets.hyprlock.enable =
-          lib.mkIf config.programs.hyprlock.enable false;
-      })
+          stylix.targets.hyprlock.enable = lib.mkIf config.programs.hyprlock.enable false;
+        }
+      )
     ];
   };
 }
