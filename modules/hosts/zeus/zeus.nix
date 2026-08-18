@@ -17,11 +17,16 @@
       hardware.facter.reportPath = ./facter.json;
 
       nix = {
+        package = pkgs.nixVersions.latest;
         settings = {
+          builders-use-substitutes = true;
           system-features = [ "uid-range" ];
           experimental-features = [
             "auto-allocate-uids"
             "cgroups"
+            "ca-derivations"
+            "dynamic-derivations"
+            "recursive-nix"
           ];
           auto-allocate-uids = true;
         };
