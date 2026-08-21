@@ -35,4 +35,5 @@ jobs:
             .#nixosConfigurations.zeus.config.system.build.toplevel \
             .#nixosConfigurations.ares.config.system.build.toplevel \
             .#nixosConfigurations.hermes.config.system.build.toplevel \
+            .#nixosConfigurations.pan.config.system.build.toplevel \
             --accept-flake-config

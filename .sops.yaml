@@ -1,0 +1,10 @@
+keys:
+  - &pan age1ppauct9zunahsvlfaut3dxd5r2nq09zppknv3fcghx4hdll26uaqfvlz3n
+  - &julius ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDXQcojTiuyFuYWsHQ4Cd9mZcBzPY3nxbllyNW6SuW7
+
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+          - *pan
+          - *julius

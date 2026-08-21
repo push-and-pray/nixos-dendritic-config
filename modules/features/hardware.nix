@@ -3,6 +3,13 @@
     ssd = {
       services.fstrim.enable = true;
     };
+    zswap = {
+      boot.zswap = {
+        enable = true;
+        compressor = "zstd";
+        zpool = "zsmalloc";
+      };
+    };
     nvidia = {
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
