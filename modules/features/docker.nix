@@ -1,18 +1,15 @@
 {
   flake.modules.nixos.docker = { pkgs, ... }: {
     virtualisation = {
-      podman = {
+      docker = {
         enable = true;
-        dockerCompat = true;
-        dockerSocket.enable = true;
         autoPrune.enable = true;
-        defaultNetwork.settings.dns_enabled = true;
       };
     };
 
     users.users.julius = {
       extraGroups = [
-        "podman"
+        "docker"
       ];
     };
   };

@@ -14,7 +14,6 @@ in
       extraGroups = [
         "wheel"
         "networkmanager"
-        "docker"
         "video"
         "i2c"
         "tss"
