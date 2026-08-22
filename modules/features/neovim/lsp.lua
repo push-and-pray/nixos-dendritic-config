@@ -81,14 +81,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
 		end
 		if client:supports_method("textDocument/codeLens") then
-			vim.lsp.codelens.refresh({ bufnr = args.buf })
-			vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-				group = vim.api.nvim_create_augroup("julius-lsp-codelens", { clear = false }),
-				buffer = args.buf,
-				callback = function()
-					vim.lsp.codelens.refresh({ bufnr = args.buf })
-				end,
-			})
+			vim.lsp.codelens.enable(true, { bufnr = args.buf })
 		end
 	end,
 })
