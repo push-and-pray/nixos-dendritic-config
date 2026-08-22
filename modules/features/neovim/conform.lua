@@ -20,7 +20,7 @@ require("lz.n").load({
 				bash = { "shfmt" },
 				c = { "clang_format" },
 				cpp = { "clang_format" },
-				go = { "goimports", "gofumpt" },
+				go = { "golangci-lint" },
 				java = { "google-java-format" },
 				json = { "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
