@@ -20,7 +20,10 @@
         package = pkgs.nixVersions.latest;
         settings = {
           builders-use-substitutes = true;
-          system-features = [ "uid-range" ];
+          system-features = [
+            "uid-range"
+            "gccarch-x86-64-v3"
+          ];
           experimental-features = [
             "auto-allocate-uids"
             "cgroups"
@@ -41,6 +44,7 @@
               "big-parallel"
               "kvm"
               "benchmark"
+              "gccarch-x86-64-v3"
             ];
             protocol = "ssh-ng";
           }
