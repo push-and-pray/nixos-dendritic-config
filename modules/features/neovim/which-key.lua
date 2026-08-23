@@ -8,6 +8,7 @@ require("lz.n").load({
 				{ "<leader>e", group = "diagnostics" },
 				{ "<leader>f", group = "find" },
 				{ "<leader>g", group = "git" },
+				{ "<leader>r", group = "run" },
 			},
 		})
 	end,
