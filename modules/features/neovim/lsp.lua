@@ -104,6 +104,16 @@ require("lz.n").load({
 	"fidget.nvim",
 	event = "LspAttach",
 	after = function()
-		require("fidget").setup()
+		require("fidget").setup({
+			notification = {
+				override_vim_notify = true,
+				window = {
+					align = "top",
+				},
+				view = {
+					stack_upwards = false,
+				},
+			},
+		})
 	end,
 })
