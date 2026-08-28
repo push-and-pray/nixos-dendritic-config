@@ -90,9 +90,10 @@
         interfaces = [ vpnInterface ];
 
         config =
-          { pkgs, ... }:
+          { lib, pkgs, ... }:
           let
             port-forward = pkgs.python3Packages.callPackage ../../../pkgs/port-forward.nix { };
+            setWebUIPassword = "${pkgs.python3}/bin/python3 ${./qbittorrent-webui-password.py} /run/secrets/qbittorrent-password /var/lib/qBittorrent/qBittorrent/config/qBittorrent.conf";
           in
           {
             imports = [ inputs.self.modules.nixos.media-group ];
@@ -150,6 +151,9 @@
                   WebUI = {
                     Address = "192.168.100.2";
                     Username = "admin";
+
+                    MaxAuthenticationFailCount = 10;
+                    BanDuration = 300;
                   };
                   General.Locale = "en";
                 };
@@ -170,7 +174,11 @@
               };
             };
 
-            systemd.services.qbittorrent.serviceConfig.UMask = "0002";
+            systemd.services.qbittorrent.serviceConfig = {
+              UMask = "0002";
+
+              ExecStartPre = lib.mkAfter [ setWebUIPassword ];
+            };
 
             systemd.services.portforward = {
               bindsTo = [ "qbittorrent.service" ];
