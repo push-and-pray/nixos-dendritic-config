@@ -143,9 +143,8 @@
       jellyfin
       actual
       attic
-      upsnap
+      beszel
       reverse-proxy
-      podman
       sops
     ];
   };

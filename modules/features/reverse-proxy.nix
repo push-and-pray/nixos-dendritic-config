@@ -68,9 +68,9 @@
       };
     };
 
-    upsnap = {
+    beszel = {
       services.nginx = {
-        virtualHosts."upsnap.altanen.casa" = {
+        virtualHosts."health.altanen.casa" = {
           useACMEHost = "altanen.casa";
           forceSSL = true;
           locations."/" = {
