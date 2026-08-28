@@ -139,7 +139,7 @@
               enable = true;
               group = "media";
               serverConfig = {
-                Networking = {
+                Network = {
                   PortForwardingEnabled = false;
                 };
                 Core = {
