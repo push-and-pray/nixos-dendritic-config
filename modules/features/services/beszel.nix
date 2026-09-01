@@ -12,10 +12,9 @@
 
         environment = {
           LISTEN = "127.0.0.1:45876";
-
           KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJshyKXyMb9W1xxPZfS9rUU1XcqTaG7MGPqchuUq7aBD";
-
           GPU_COLLECTOR = "amd_sysfs";
+          AUTO_LOGIN = "admin@altanen.casa";
         };
 
         smartmon.enable = true;
