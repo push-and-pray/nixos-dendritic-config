@@ -14,6 +14,7 @@
         kicad
         obsidian
         jellyfin-client
+        ltspice
       ];
     };
     spotify = { pkgs, ... }: {
@@ -28,6 +29,9 @@
     };
     kicad = { pkgs, ... }: {
       home.packages = with pkgs; [ kicad ];
+    };
+    ltspice = { pkgs, ... }: {
+      home.packages = with pkgs; [ ltspice ];
     };
     firefox = {
       programs.firefox = {
