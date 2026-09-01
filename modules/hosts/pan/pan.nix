@@ -144,6 +144,7 @@
       actual
       attic
       beszel
+      ntfy
       reverse-proxy
       sops
     ];
