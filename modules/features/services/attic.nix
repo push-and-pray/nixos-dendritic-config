@@ -35,6 +35,20 @@
         attic-client
       ];
 
+      services.nginx.virtualHosts."attic.altanen.casa" = {
+        useACMEHost = "altanen.casa";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:4321";
+          extraConfig = ''
+            client_max_body_size 0;
+            proxy_request_buffering off;
+            proxy_read_timeout 600s;
+            proxy_send_timeout 600s;
+          '';
+        };
+      };
+
       sops.secrets = {
         "attic/jwt_secret" = {
           sopsFile = ../../../secrets/attic.yaml;

@@ -24,5 +24,14 @@
         smartmon.enable = true;
       };
     };
+
+    services.nginx.virtualHosts."health.altanen.casa" = {
+      useACMEHost = "altanen.casa";
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8090";
+        proxyWebsockets = true;
+      };
+    };
   };
 }

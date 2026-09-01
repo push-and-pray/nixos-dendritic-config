@@ -15,6 +15,15 @@
       networking.useNetworkd = true;
       networking.firewall.allowedTCPPorts = [ 8080 ];
 
+      services.nginx.virtualHosts."qbittorrent.altanen.casa" = {
+        useACMEHost = "altanen.casa";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://192.168.0.100:8080";
+          proxyWebsockets = true;
+        };
+      };
+
       sops.secrets = {
         wg = {
           sopsFile = ../../../secrets/wg.yaml;

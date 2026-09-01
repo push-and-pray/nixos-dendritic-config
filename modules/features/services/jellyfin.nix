@@ -35,6 +35,18 @@
         enable = true;
         group = "media";
       };
+
+      nginx.virtualHosts."jellyfin.altanen.casa" = {
+        useACMEHost = "altanen.casa";
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8096";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_buffering off;
+          '';
+        };
+      };
     };
 
     systemd.services.jellyfin = {

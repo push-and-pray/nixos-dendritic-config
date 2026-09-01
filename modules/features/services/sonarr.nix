@@ -33,6 +33,19 @@
           group = "media";
           environmentFiles = [ "/run/secrets/sonarr_secrets.env" ];
         };
+
+        nginx.virtualHosts."sonarr.altanen.casa" = {
+          useACMEHost = "altanen.casa";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8989";
+            proxyWebsockets = true;
+            extraConfig = ''
+              proxy_read_timeout 600s;
+              proxy_send_timeout 600s;
+            '';
+          };
+        };
       };
 
       systemd.services.sonarr.serviceConfig.UMask = lib.mkForce "0002";
