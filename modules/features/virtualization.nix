@@ -15,14 +15,6 @@
       users.users.julius = {
         extraGroups = [ "libvirtd" ];
       };
-
-      home-manager.sharedModules = [
-        {
-          home.packages = with pkgs; [
-            remmina
-          ];
-        }
-      ];
     };
   };
 }
