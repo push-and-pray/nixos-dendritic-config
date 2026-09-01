@@ -5,6 +5,7 @@ require("lz.n").load({
 		require("which-key").setup({
 			spec = {
 				{ "<leader>c", group = "code" },
+				{ "<leader>d", group = "debug" },
 				{ "<leader>e", group = "diagnostics" },
 				{ "<leader>f", group = "find" },
 				{ "<leader>g", group = "git" },
