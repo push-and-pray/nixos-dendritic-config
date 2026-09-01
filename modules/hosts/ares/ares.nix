@@ -50,10 +50,6 @@
         upower.enable = true;
       };
 
-      # Boost startup speed
-      virtualisation.docker.enableOnBoot = false;
-      systemd.services.NetworkManager-wait-online.enable = false;
-
       home-manager.sharedModules = [
         {
           wayland.windowManager.hyprland.settings = {
@@ -63,7 +59,6 @@
           };
         }
 
-        inputs.self.modules.homeManager.matlab
       ];
 
       programs.localsend = {
