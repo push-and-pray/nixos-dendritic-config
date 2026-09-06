@@ -21,46 +21,7 @@
     nix.settings = {
       system-features = [
         "gccarch-x86-64-v3"
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
       ];
-
-      substituters = [
-        "https://cache.nixos.org?priority=10"
-        "https://nix-community.cachix.org?priority=15"
-        "https://install.determinate.systems?priority=20"
-      ];
-
-      auto-optimise-store = true;
-
-      trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM"
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
-
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-
-      download-buffer-size = 1024 * 1024 * 256;
-
-      trusted-users = [
-        "root"
-        "@wheel"
-      ];
-    };
-
-    programs.nh = {
-      enable = true;
-      clean = {
-        enable = true;
-        extraArgs = "--keep-since 4d --keep 3";
-        dates = "daily";
-      };
     };
 
     security.sudo.wheelNeedsPassword = false;
@@ -128,6 +89,7 @@
     ];
 
     imports = with inputs.self.modules.nixos; [
+      nix
       locale
       systemd-boot
       amd

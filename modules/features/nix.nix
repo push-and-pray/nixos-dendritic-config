@@ -34,13 +34,5 @@
       clean.extraArgs = "--keep-since 30d --keep 3";
       flake = "~/dev/nix/os/";
     };
-
-    home-manager.sharedModules = [
-      {
-        home.packages = with pkgs; [
-          attic-client
-        ];
-      }
-    ];
   };
 }
