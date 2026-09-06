@@ -54,6 +54,8 @@
       sopsFile = ../../../secrets/ts-key.yaml;
     };
 
+    boot.loader.systemd-boot.bootCounting.enable = true;
+
     services = {
       nginx = {
         virtualHosts = {
