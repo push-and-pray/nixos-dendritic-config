@@ -15,8 +15,23 @@
         obsidian
         jellyfin-client
         ltspice
+        anki
       ];
     };
+    anki =
+      { pkgs, ... }:
+      {
+        home.packages = [
+          (pkgs.anki.withAddons (
+            with pkgs.ankiAddons;
+            [
+              image-occlusion-enhanced
+              review-heatmap
+            ]
+          ))
+        ];
+      };
+
     spotify = { pkgs, ... }: {
       home.packages = with pkgs; [ spotify ];
     };

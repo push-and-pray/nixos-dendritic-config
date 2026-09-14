@@ -109,6 +109,7 @@
       attic
       beszel
       ntfy
+      anki-sync-server
       reverse-proxy
       sops
     ];
