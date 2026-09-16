@@ -102,6 +102,10 @@
           git = {
             enable = true;
 
+            ignores = [
+              ".direnv/"
+            ];
+
             settings = {
               alias = {
                 ls = "!${gls-script}/bin/git-gls";
