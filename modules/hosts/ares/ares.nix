@@ -57,9 +57,16 @@
               (pkgs.lib.generators.mkLuaInline "{ output = \"\", mode = \"preferred\", position = \"auto\", scale = 1.6 }")
             ];
           };
+
+          home.packages = with pkgs; [
+            nrfutil
+            nrfconnect
+          ];
         }
 
       ];
+
+      nixpkgs.config.segger-jlink.acceptLicense = true;
 
       programs.localsend = {
         enable = true;
