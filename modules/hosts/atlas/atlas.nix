@@ -6,8 +6,7 @@
     ];
   };
 
-  flake.modules.nixos.atlas = { config, pkgs, ... }: {
-    nixpkgs.hostPlatform = "x86_64-linux";
+  flake.modules.nixos.atlas = { pkgs, ... }: {
     system.stateVersion = "26.11";
     hardware.facter.reportPath = ./facter.json;
 
@@ -20,49 +19,27 @@
       ];
     };
 
-    boot.loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-
     networking = {
       hostName = "atlas";
       useDHCP = true;
       useNetworkd = true;
+      interfaces.enp86s0.wakeOnLan.enable = true;
     };
 
-    environment.enableAllTerminfo = true;
+    sops.secrets.tailscale-auth-key.key = "ts-key-atlas";
 
-    security.sudo.wheelNeedsPassword = false;
-    users.users.julius = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPiaayaWR+KgD/2gUke5ll5ZKHMLnTJx/3bfc2522qiQ julius@ares"
-        "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIL27EDkViSsAa6PByx7ZaqAg2CgL3V1Wiy6RmQ/StegbAAAABHNzaDo= julius@zeus"
-      ];
-    };
-
-    services.openssh.settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
-    };
-    services.tailscale = {
-      authKeyFile = config.sops.secrets.ts-key-atlas.path;
-      openFirewall = true;
-    };
-
-    sops.secrets.ts-key-atlas = {
-      sopsFile = ../../../secrets/ts-key.yaml;
-    };
+    swapDevices = [
+      {
+        device = "/var/lib/swapfile";
+        size = 16384;
+      }
+    ];
 
     imports = with inputs.self.modules.nixos; [
-      nix
-      locale
-      ssh
-      tailscale
-      sops
+      server
+      intel
+      ssd
+      zswap
     ];
   };
 }
