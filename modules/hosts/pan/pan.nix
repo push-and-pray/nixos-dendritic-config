@@ -39,10 +39,6 @@
       authKeyFile = "/run/secrets/ts-key";
       port = 41641;
       openFirewall = true;
-      extraSetFlags = [
-        "--relay-server-port=40000"
-        "--relay-server-static-endpoints=185.107.13.2:40000"
-      ];
     };
     networking = {
       firewall.allowedUDPPorts = [ 40000 ];
