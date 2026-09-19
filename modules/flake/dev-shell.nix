@@ -16,6 +16,7 @@
           nixos-facter
           nix-output-monitor
           stylua
+          sops
         ];
       };
     };
