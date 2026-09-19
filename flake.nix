@@ -26,6 +26,9 @@
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     git-hooks-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    colmena.url = "github:zhaofengli/colmena";
+    colmena.inputs.nixpkgs.follows = "nixpkgs";
+
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
