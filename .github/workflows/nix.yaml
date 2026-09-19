@@ -10,6 +10,7 @@ on:
         type: boolean
   schedule:
     - cron: "0 0 * * 0"
+      timezone: "Europe/Copenhagen"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
