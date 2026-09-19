@@ -6,10 +6,19 @@
     ];
   };
 
-  flake.modules.nixos.atlas = { config, ... }: {
+  flake.modules.nixos.atlas = { config, pkgs, ... }: {
     nixpkgs.hostPlatform = "x86_64-linux";
     system.stateVersion = "26.11";
     hardware.facter.reportPath = ./facter.json;
+
+    hardware.graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        intel-compute-runtime
+        vpl-gpu-rt
+      ];
+    };
 
     boot.loader = {
       systemd-boot.enable = true;
