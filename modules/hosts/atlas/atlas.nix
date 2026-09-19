@@ -16,8 +16,11 @@
       efi.canTouchEfiVariables = true;
     };
 
-    networking.hostName = "atlas";
-    networking.useDHCP = true;
+    networking = {
+      hostName = "atlas";
+      useDHCP = true;
+      useNetworkd = true;
+    };
 
     environment.enableAllTerminfo = true;
 
