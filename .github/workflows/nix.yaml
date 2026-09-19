@@ -58,7 +58,7 @@ jobs:
             .#nixosConfigurations.ares.config.system.build.toplevel \
             .#nixosConfigurations.hermes.config.system.build.toplevel \
             .#nixosConfigurations.pan.config.system.build.toplevel \
-            .#nixosConfigurations.atlas.config.system.build.toplevel
+            .#nixosConfigurations.atlas.config.system.build.toplevel \
             --accept-flake-config
 
       - name: Commit flake.lock
