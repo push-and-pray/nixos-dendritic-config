@@ -1,5 +1,6 @@
 keys:
   - &pan age1ppauct9zunahsvlfaut3dxd5r2nq09zppknv3fcghx4hdll26uaqfvlz3n
+  - &atlas age1lqhq4tlq3sgnt05se3p4999vd9hmg2ge55pz8rx75fts7fxqsp8qa29pd9
   - &zeus ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEDXQcojTiuyFuYWsHQ4Cd9mZcBzPY3nxbllyNW6SuW7
   - &ares age17x2zeaw8culu9ug6rgs56ghf46rkj9574tpfj3xjzs2yy26u5fts25a6r4
 
@@ -10,3 +11,4 @@ creation_rules:
           - *pan
           - *zeus
           - *ares
+          - *atlas
