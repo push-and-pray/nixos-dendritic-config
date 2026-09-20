@@ -3,6 +3,7 @@
     services = {
       prowlarr = {
         enable = true;
+        settings.server.bindaddress = "127.0.0.1";
       };
 
       nginx.virtualHosts."prowlarr.altanen.casa" = {

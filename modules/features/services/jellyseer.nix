@@ -14,5 +14,7 @@
         };
       };
     };
+
+    systemd.services.seerr.environment.HOST = "127.0.0.1";
   };
 }

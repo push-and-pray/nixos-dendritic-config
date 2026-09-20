@@ -17,6 +17,9 @@
       };
     };
 
-    systemd.services.bazarr.serviceConfig.UMask = "0002";
+    systemd.services.bazarr = {
+      environment.DYNACONF_GENERAL__IP = "127.0.0.1";
+      serviceConfig.UMask = "0002";
+    };
   };
 }

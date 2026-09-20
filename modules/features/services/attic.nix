@@ -10,7 +10,7 @@
         enable = true;
         environmentFile = config.sops.templates."attic.env".path;
         settings = {
-          listen = "[::]:4321";
+          listen = "127.0.0.1:4321";
           api-endpoint = "https://attic.altanen.casa/";
           storage = {
             type = "s3";

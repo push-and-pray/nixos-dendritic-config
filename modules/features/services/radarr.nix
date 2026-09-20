@@ -32,6 +32,7 @@
           enable = true;
           group = "media";
           environmentFiles = [ "/run/secrets/radarr_secrets.env" ];
+          settings.server.bindaddress = "127.0.0.1";
         };
 
         nginx.virtualHosts."radarr.altanen.casa" = {
