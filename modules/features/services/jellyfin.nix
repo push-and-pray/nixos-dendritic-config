@@ -24,6 +24,8 @@
       options = [
         "size=20G"
         "mode=0755"
+        "uid=jellyfin"
+        "gid=media"
         "nosuid"
         "nodev"
         "noexec"

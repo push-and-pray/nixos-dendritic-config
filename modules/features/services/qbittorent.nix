@@ -19,7 +19,7 @@
         useACMEHost = "altanen.casa";
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://192.168.0.100:8080";
+          proxyPass = "http://192.168.0.42:8080";
           proxyWebsockets = true;
         };
       };

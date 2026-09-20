@@ -40,13 +40,7 @@
       amd
       ssd
       zswap
-      media-server
-      notes
-      actual
-      attic
-      beszel
-      ntfy
-      anki-sync-server
+      beszel-agent
     ];
   };
 }
