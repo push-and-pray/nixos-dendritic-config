@@ -37,6 +37,7 @@
       extraPackages = with pkgs; [
         util-linux
         jq
+        gh
       ];
     };
 
