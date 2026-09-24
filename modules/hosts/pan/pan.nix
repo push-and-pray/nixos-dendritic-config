@@ -6,7 +6,7 @@
     ];
   };
 
-  flake.modules.nixos.pan = { pkgs, ... }: {
+  flake.modules.nixos.pan = { config, pkgs, ... }: {
     system.stateVersion = "26.05";
     hardware.facter.reportPath = ./facter.json;
 
@@ -19,6 +19,22 @@
       system-features = [
         "gccarch-x86-64-v3"
       ];
+    };
+
+    services.github-runners.pan = {
+      enable = true;
+      url = "https://github.com/Dumb-Projects-Inc/os-challenge-makenomistakes";
+      tokenFile = config.sops.secrets.github-runner-token.path;
+      extraLabels = [ "pan" ];
+      extraPackages = with pkgs; [
+        util-linux
+        jq
+      ];
+    };
+
+    sops.secrets.github-runner-token = {
+      sopsFile = ../../../secrets/github-runner.yaml;
+      key = "token";
     };
 
     networking = {
