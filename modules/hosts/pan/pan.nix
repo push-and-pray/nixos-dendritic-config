@@ -21,6 +21,14 @@
       ];
     };
 
+    # free up core 6-11 for other work
+    systemd.settings.Manager.CPUAffinity = "0-5";
+    boot.kernelParams = [
+      "isolcpus=domain,managed_irq,6-11"
+      "irqaffinity=0-5"
+      "kthread_cpus=0-5"
+    ];
+
     services.github-runners.pan = {
       enable = true;
       url = "https://github.com/Dumb-Projects-Inc/os-challenge-makenomistakes";
