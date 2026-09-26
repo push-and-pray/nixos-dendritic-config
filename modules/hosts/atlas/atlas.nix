@@ -46,7 +46,6 @@
       attic
       beszel
       ntfy
-      anki-sync-server
     ];
   };
 }
