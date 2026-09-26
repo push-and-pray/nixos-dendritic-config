@@ -85,6 +85,7 @@
         homeManager
         tailscale
         ssh
+        tpm
         yubi
         libvirt
         stylix

@@ -25,7 +25,8 @@
         isNormalUser = true;
         extraGroups = [ "wheel" ];
         openssh.authorizedKeys.keys = [
-          "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIL27EDkViSsAa6PByx7ZaqAg2CgL3V1Wiy6RmQ/StegbAAAABHNzaDo= julius@zeus"
+          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJ6ff8lr573v+4rgXxwjqoV+ESDS8JHguN0p4RC4fZ0c5wd0u+sN+RSg/J8QpqNlDZqsvnikpk5QKAx57PD/G10= julius@zeus"
+          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBG9qewLarr7c1lAKviZQVvmqcQ5jmQbnFfcrQ+3mGODCEQoiha5oTFDMeUk4S3tpPIVBEg1c3rkNlkIYUMJ97cI= julius@ares"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPiaayaWR+KgD/2gUke5ll5ZKHMLnTJx/3bfc2522qiQ julius@ares"
         ];
       };
