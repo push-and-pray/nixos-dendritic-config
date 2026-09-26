@@ -25,8 +25,6 @@
 
       programs.dms-shell = {
         enable = true;
-        enableCalendarEvents = false;
-        enableDynamicTheming = false;
         plugins = {
           dankPomodoroTimer = {
             enable = true;
