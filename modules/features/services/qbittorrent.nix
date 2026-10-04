@@ -149,7 +149,7 @@
               ExecStartPre = lib.mkAfter [ setWebUIPassword ];
 
               NetworkNamespacePath = "/run/netns/vpn";
-              BindReadOnlyPaths = [ "/etc/netns/vpn/resolv.conf:/etc/resolv.conf" ];
+              BindReadOnlyPaths = [ "/etc/netns/vpn/resolv.conf:/run/systemd/resolve/stub-resolv.conf" ];
               InaccessiblePaths = [
                 "/run/nscd/socket"
                 "/run/systemd/resolve/io.systemd.Resolve"
@@ -163,7 +163,7 @@
 
             serviceConfig = {
               NetworkNamespacePath = "/run/netns/vpn";
-              BindReadOnlyPaths = [ "/etc/netns/vpn/resolv.conf:/etc/resolv.conf" ];
+              BindReadOnlyPaths = [ "/etc/netns/vpn/resolv.conf:/run/systemd/resolve/stub-resolv.conf" ];
               ExecStart = "${port-forward}/bin/portforward";
               Restart = "on-failure";
               RestartSec = "10s";
