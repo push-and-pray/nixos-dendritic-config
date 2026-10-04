@@ -48,8 +48,10 @@
       };
 
       environment = {
-        enableAllTerminfo = true;
-        systemPackages = [ pkgs.neovim ];
+        systemPackages = [
+          pkgs.neovim
+          pkgs.kitty.terminfo
+        ];
       };
     };
 }
