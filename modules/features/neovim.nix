@@ -16,6 +16,12 @@ _: {
       withNodeJs = false;
       withPython3 = false;
       withRuby = false;
+      extraPackages = with pkgs; [
+        nixd
+        nixfmt
+        statix
+        deadnix
+      ];
     };
   };
 }

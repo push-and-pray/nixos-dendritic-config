@@ -4,6 +4,7 @@ _: {
       blink-cmp
       friendly-snippets
       nvim-lspconfig
+      rustaceanvim
       {
         plugin = fidget-nvim;
         optional = true;

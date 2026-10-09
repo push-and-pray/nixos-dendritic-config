@@ -17,6 +17,21 @@ require("blink.cmp").setup({
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("*", { capabilities = capabilities })
 
+vim.g.rustaceanvim = function()
+	require("lz.n").trigger_load("nvim-dap")
+	return {
+		server = {
+			capabilities = capabilities,
+			default_settings = {
+				["rust-analyzer"] = {
+					check = { command = "clippy" },
+					files = { excludeDirs = { ".direnv" } },
+				},
+			},
+		},
+	}
+end
+
 local servers = {
 	clangd = { cmd = "clangd" },
 	gopls = { cmd = "gopls" },
@@ -29,17 +44,6 @@ local servers = {
 	},
 	nixd = { cmd = "nixd" },
 	pyright = { cmd = "pyright-langserver" },
-	rust_analyzer = {
-		cmd = "rust-analyzer",
-		config = {
-			settings = {
-				["rust-analyzer"] = {
-					check = { command = "clippy" },
-					files = { excludeDirs = { ".direnv" } },
-				},
-			},
-		},
-	},
 	yamlls = {
 		cmd = "yaml-language-server",
 		config = {
