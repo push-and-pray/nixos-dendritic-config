@@ -39,6 +39,7 @@
       };
 
       nginx.virtualHosts."jellyfin.altanen.casa" = {
+        serverAliases = [ "jellyfin.lan.altanen.casa" ];
         useACMEHost = "altanen.casa";
         forceSSL = true;
         locations."/" = {

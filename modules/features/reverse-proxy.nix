@@ -48,7 +48,10 @@
 
     security.acme.certs."altanen.casa" = {
       domain = "altanen.casa";
-      extraDomainNames = [ "*.altanen.casa" ];
+      extraDomainNames = [
+        "*.altanen.casa"
+        "*.lan.altanen.casa"
+      ];
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       environmentFile = "/run/secrets/cloudflare.env";
