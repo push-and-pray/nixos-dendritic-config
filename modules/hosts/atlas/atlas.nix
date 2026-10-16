@@ -24,6 +24,7 @@
       useDHCP = true;
       useNetworkd = true;
       interfaces.enp86s0.wakeOnLan.enable = true;
+      nftables.enable = true;
     };
 
     sops.secrets.tailscale-auth-key.key = "ts-key-atlas";

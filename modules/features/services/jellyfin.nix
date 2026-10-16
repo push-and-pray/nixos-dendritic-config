@@ -52,6 +52,8 @@
       };
     };
 
+    networking.firewall.allowedUDPPorts = [ 7359 ];
+
     systemd.services.jellyfin = {
       environment = {
         # The service's home is /var/empty, so Mesa cannot create its default
