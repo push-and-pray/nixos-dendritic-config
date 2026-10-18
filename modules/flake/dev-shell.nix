@@ -17,7 +17,6 @@
           nixfmt
           nixos-facter
           nix-output-monitor
-          inputs.colmena.packages.${system}.colmena
           stylua
           sops
         ];
