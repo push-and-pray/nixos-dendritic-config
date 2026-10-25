@@ -9,14 +9,11 @@
         efi.canTouchEfiVariables = true;
       };
 
-      initrd.systemd.enable = true;
-
       plymouth = {
         enable = true;
       };
 
       consoleLogLevel = 0;
-      initrd.verbose = false;
       kernelParams = [
         "quiet"
         "boot.shell_on_fail"

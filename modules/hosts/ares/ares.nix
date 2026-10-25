@@ -35,9 +35,6 @@
       networking.hostName = "ares";
 
       boot = {
-        # nixos-facter mislabels my ethernet device
-        extraModulePackages = [ config.boot.kernelPackages.yt6801 ];
-        kernelModules = [ "yt6801" ];
         zswap.enable = true;
       };
 

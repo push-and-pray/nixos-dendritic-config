@@ -23,7 +23,7 @@
         qt6.qtmultimedia
       ];
 
-      programs.dms-shell = {
+      programs.dux-shell = {
         enable = true;
         plugins = {
           dankPomodoroTimer = {
