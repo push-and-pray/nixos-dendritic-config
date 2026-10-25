@@ -2,9 +2,13 @@
   flake.modules.nixos.nix = { pkgs, ... }: {
     nix.settings = {
       substituters = [
-        "https://cache.nixos.org?priority=10"
-        "https://nix-community.cachix.org"
-        "https://push-and-pray-config.cachix.org"
+        "https://cache.lan.altanen.casa?priority=10"
+        "https://cache.lan.altanen.casa/nix-community?priority=15"
+        "https://cache.lan.altanen.casa/push-and-pray?priority=15"
+
+        "https://cache.nixos.org?priority=30"
+        "https://nix-community.cachix.org?priority=35"
+        "https://push-and-pray-config.cachix.org?priority=35"
       ];
 
       auto-optimise-store = true;

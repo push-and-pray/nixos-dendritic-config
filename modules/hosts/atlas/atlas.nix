@@ -47,6 +47,7 @@
       attic
       beszel
       ntfy
+      nix-cache
     ];
   };
 }
