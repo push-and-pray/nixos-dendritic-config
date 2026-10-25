@@ -44,7 +44,6 @@
       media-server
       notes
       actual
-      attic
       beszel
       ntfy
       nix-cache
