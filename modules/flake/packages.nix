@@ -4,6 +4,7 @@ _: {
       elemental = pkgs.callPackage ../../pkgs/elemental.nix { };
       sam-ba = pkgs.callPackage ../../pkgs/sam-ba.nix { };
       matlab = pkgs.callPackage ../../pkgs/matlab-fhs.nix { };
+      artcraft-launcher = pkgs.callPackage ../../pkgs/artcraft-launcher.nix { };
     };
   };
 }

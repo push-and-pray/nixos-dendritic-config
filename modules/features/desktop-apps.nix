@@ -1,4 +1,19 @@
 { inputs, ... }: {
+  flake.modules.nixos = {
+    desktop-apps = {
+      programs.appimage = {
+        enable = true;
+        binfmt = true;
+      };
+    };
+    artcraft-launcher = {
+      programs.appimage = {
+        enable = true;
+        binfmt = true;
+      };
+    };
+  };
+
   flake.modules.homeManager = {
     desktop-apps = {
       imports = with inputs.self.modules.homeManager; [
@@ -15,6 +30,7 @@
         obsidian
         jellyfin-client
         ltspice
+        artcraft-launcher
       ];
     };
     anki =
@@ -95,6 +111,11 @@
     matlab = { pkgs, ... }: {
       home.packages = [
         inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.matlab
+      ];
+    };
+    artcraft-launcher = { pkgs, ... }: {
+      home.packages = [
+        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.artcraft-launcher
       ];
     };
   };

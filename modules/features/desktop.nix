@@ -10,6 +10,7 @@
         hyprland
         network
         keyring
+        desktop-apps
       ];
       home-manager.sharedModules = with inputs.self.modules.homeManager; [
         desktop-apps
