@@ -14,10 +14,17 @@
       ...
     }:
     let
-      port-forward = pkgs.python3Packages.callPackage ../../../pkgs/port-forward.nix { };
+      port-forward = pkgs.callPackage ../../../pkgs/port-forward.nix { };
       setWebUIPassword = "${pkgs.python3}/bin/python3 ${./qbittorrent-webui-password.py} ${
         config.sops.secrets."qbittorrent/password".path
       } /var/lib/qBittorrent/qBittorrent/config/qBittorrent.conf";
+
+      vpnConfinement = {
+        NetworkNamespacePath = "/run/netns/vpn";
+        TemporaryFileSystem = [ "/run/systemd/resolve:ro" ];
+        BindReadOnlyPaths = [ "/etc/netns/vpn/resolv.conf:/run/systemd/resolve/stub-resolv.conf" ];
+        InaccessiblePaths = [ "/run/nscd/socket" ];
+      };
     in
     {
       imports = with inputs.self.modules.nixos; [
@@ -32,7 +39,7 @@
         useACMEHost = "altanen.casa";
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://192.168.100.2:8080";
+          proxyPass = "http://127.0.0.1:8080";
           proxyWebsockets = true;
         };
       };
@@ -54,12 +61,13 @@
       services.qbittorrent = {
         enable = true;
         group = "media";
+        extraArgs = [ "--confirm-legal-notice" ];
         serverConfig = {
           Network.PortForwardingEnabled = false;
           Core.AutoDeleteAddedTorrentFile = "IfAdded";
           Preferences = {
             WebUI = {
-              Address = "192.168.100.2";
+              Address = "127.0.0.1";
               Username = "admin";
               MaxAuthenticationFailCount = 10;
               BanDuration = 300;
@@ -89,81 +97,86 @@
           "d /var/lib/qBittorrent 0770 qbittorrent media -"
           "Z /var/lib/qBittorrent 0770 qbittorrent media -"
         ];
-        network.networks."40-ve-vpn" = {
-          matchConfig.Name = "ve-vpn";
-          linkConfig.Unmanaged = true;
+        sockets.qbittorrent-webui = {
+          description = "qBittorrent WebUI proxy socket";
+          wantedBy = [ "sockets.target" ];
+          socketConfig.ListenStream = "127.0.0.1:8080";
         };
         services = {
           netns-vpn = {
             description = "WireGuard VPN Network Namespace";
             before = [ "network.target" ];
             wantedBy = [ "multi-user.target" ];
+            path = [
+              pkgs.iproute2
+              pkgs.wireguard-tools
+            ];
             serviceConfig = {
               Type = "oneshot";
               RemainAfterExit = true;
               ExecStart = pkgs.writeShellScript "netns-vpn-up" ''
                 set -euo pipefail
 
-                ${pkgs.iproute2}/bin/ip netns add vpn 2>/dev/null || true
-                ${pkgs.iproute2}/bin/ip -n vpn link set lo up
+                ip netns add vpn 2>/dev/null || true
+                ip -n vpn link set lo up
 
-                ${pkgs.iproute2}/bin/ip -n vpn link del ${vpnInterface} 2>/dev/null || true
-                ${pkgs.iproute2}/bin/ip link del ${vpnInterface} 2>/dev/null || true
-                ${pkgs.iproute2}/bin/ip link del ve-vpn 2>/dev/null || true
+                ip -n vpn link del ${vpnInterface} 2>/dev/null || true
+                ip link del ${vpnInterface} 2>/dev/null || true
 
-                ${pkgs.iproute2}/bin/ip link add ${vpnInterface} type wireguard
-                ${pkgs.iproute2}/bin/ip link set ${vpnInterface} netns vpn
-                ${pkgs.iproute2}/bin/ip -n vpn addr add ${vpnAddress} dev ${vpnInterface}
+                ip link add ${vpnInterface} type wireguard
+                ip link set ${vpnInterface} netns vpn
+                ip -n vpn addr add ${vpnAddress} dev ${vpnInterface}
 
-                ${pkgs.iproute2}/bin/ip netns exec vpn ${pkgs.wireguard-tools}/bin/wg set ${vpnInterface} \
+                ip netns exec vpn wg set ${vpnInterface} \
                   private-key ${config.sops.secrets.wg.path} \
                   peer ${vpnPublicKey} \
                   endpoint ${vpnEndpoint} \
                   allowed-ips 0.0.0.0/0 \
                   persistent-keepalive 25
 
-                ${pkgs.iproute2}/bin/ip -n vpn link set ${vpnInterface} up
-                ${pkgs.iproute2}/bin/ip -n vpn route add default dev ${vpnInterface}
-
-                ${pkgs.iproute2}/bin/ip link add ve-vpn type veth peer name veth-vpn
-                ${pkgs.iproute2}/bin/ip link set veth-vpn netns vpn
-
-                ${pkgs.iproute2}/bin/ip addr add 192.168.100.1/24 dev ve-vpn
-                ${pkgs.iproute2}/bin/ip link set ve-vpn up
-
-                ${pkgs.iproute2}/bin/ip -n vpn addr add 192.168.100.2/24 dev veth-vpn
-                ${pkgs.iproute2}/bin/ip -n vpn link set veth-vpn up
+                ip -n vpn link set ${vpnInterface} up
+                ip -n vpn route add default dev ${vpnInterface}
               '';
               ExecStop = pkgs.writeShellScript "netns-vpn-down" ''
-                ${pkgs.iproute2}/bin/ip -n vpn link del ${vpnInterface} 2>/dev/null || true
-                ${pkgs.iproute2}/bin/ip link del ve-vpn 2>/dev/null || true
-                ${pkgs.iproute2}/bin/ip netns del vpn 2>/dev/null || true
+                ip -n vpn link del ${vpnInterface} 2>/dev/null || true
+                ip netns del vpn 2>/dev/null || true
               '';
             };
           };
           qbittorrent = {
             bindsTo = [ "netns-vpn.service" ];
             after = [ "netns-vpn.service" ];
-            serviceConfig = {
+            serviceConfig = vpnConfinement // {
               UMask = "0002";
               ExecStartPre = lib.mkAfter [ setWebUIPassword ];
-
+            };
+          };
+          qbittorrent-webui = {
+            description = "qBittorrent WebUI proxy into VPN namespace";
+            bindsTo = [
+              "qbittorrent.service"
+              "qbittorrent-webui.socket"
+            ];
+            after = [
+              "qbittorrent.service"
+              "qbittorrent-webui.socket"
+            ];
+            serviceConfig = {
+              Type = "notify";
               NetworkNamespacePath = "/run/netns/vpn";
-              BindReadOnlyPaths = [ "/etc/netns/vpn/resolv.conf:/run/systemd/resolve/stub-resolv.conf" ];
-              InaccessiblePaths = [
-                "/run/nscd/socket"
-                "/run/systemd/resolve/io.systemd.Resolve"
-              ];
+              ExecStart = "${pkgs.systemd}/lib/systemd/systemd-socket-proxyd --exit-idle-time=5min 127.0.0.1:8080";
+              PrivateTmp = true;
+              DynamicUser = true;
             };
           };
           portforward = {
+            description = "NAT-PMP port forwarder for qBittorrent";
             bindsTo = [ "qbittorrent.service" ];
+            partOf = [ "qbittorrent.service" ];
             after = [ "qbittorrent.service" ];
-            wantedBy = [ "multi-user.target" ];
+            wantedBy = [ "qbittorrent.service" ];
 
-            serviceConfig = {
-              NetworkNamespacePath = "/run/netns/vpn";
-              BindReadOnlyPaths = [ "/etc/netns/vpn/resolv.conf:/run/systemd/resolve/stub-resolv.conf" ];
+            serviceConfig = vpnConfinement // {
               ExecStart = "${port-forward}/bin/portforward";
               Restart = "on-failure";
               RestartSec = "10s";

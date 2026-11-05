@@ -15,7 +15,7 @@ writeShellApplication {
 
   text = ''
     GATEWAY_IP="10.2.0.1"
-    QBIT_URL="http://192.168.100.2:8080"
+    QBIT_URL="http://127.0.0.1:8080"
     QBIT_USER="admin"
     QBIT_PASS="$(cat /run/secrets/qbittorrent-password)"
 
@@ -58,11 +58,14 @@ writeShellApplication {
       echo "Success: qBittorrent updated to port $port"
     }
 
+    last_port=""
     while true; do
       current_port=$(get_port)
 
-      if [ -n "$current_port" ]; then
-        update_qbit "$current_port"
+      if [ -n "$current_port" ] && [ "$current_port" != "$last_port" ]; then
+        if update_qbit "$current_port"; then
+          last_port="$current_port"
+        fi
       fi
 
       sleep 45
