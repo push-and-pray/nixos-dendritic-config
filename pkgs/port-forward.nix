@@ -43,17 +43,15 @@ writeShellApplication {
     update_qbit() {
       local port=$1
 
-      login_resp=$(curl -s -i --max-time 10 -c "$COOKIE_FILE" \
-        -d "username=$QBIT_USER" \
-        -d "password=$QBIT_PASS" \
-        "$QBIT_URL/api/v2/auth/login")
-
-      if ! echo "$login_resp" | grep -qE "200 OK|204 OK"; then
-         echo "Error: qBittorrent login failed." >&2
-         return 1
+      if ! curl -s -S --fail --max-time 10 -c "$COOKIE_FILE" \
+        --data-urlencode "username=$QBIT_USER" \
+        --data-urlencode "password=$QBIT_PASS" \
+        "$QBIT_URL/api/v2/auth/login" >/dev/null; then
+        echo "Error: qBittorrent login failed." >&2
+        return 1
       fi
 
-      curl -s --fail --max-time 10 -b "$COOKIE_FILE" \
+      curl -s -S --fail --max-time 10 -b "$COOKIE_FILE" \
         --data-urlencode "json={\"listen_port\": $port}" \
         "$QBIT_URL/api/v2/app/setPreferences"
 
