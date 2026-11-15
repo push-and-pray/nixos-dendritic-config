@@ -55,15 +55,9 @@
             ];
           };
 
-          home.packages = with pkgs; [
-            nrfutil
-            nrfconnect
-          ];
         }
 
       ];
-
-      nixpkgs.config.segger-jlink.acceptLicense = true;
 
       programs.localsend = {
         enable = true;
