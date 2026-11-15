@@ -27,7 +27,7 @@
           longitude = 12.5;
           temperature = {
             day = 6500;
-            night = 2500;
+            eight = 2500;
           };
         };
       };
@@ -42,11 +42,11 @@
               }
               {
                 time = "18:00";
-                temperature = 4000;
+                temperature = 5000;
               }
               {
                 time = "20:00";
-                temperature = 2500;
+                temperature = 3500;
               }
             ];
           };
