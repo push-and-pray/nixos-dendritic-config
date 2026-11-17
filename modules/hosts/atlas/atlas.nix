@@ -47,6 +47,7 @@
       beszel
       ntfy
       nix-cache
+      learnharness
     ];
   };
 }
