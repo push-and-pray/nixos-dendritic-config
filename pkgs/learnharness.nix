@@ -13,13 +13,13 @@
 
 let
   pname = "learnharness";
-  version = "0.6.1";
+  version = "0.7.0";
 
   src = fetchFromGitHub {
     owner = "amosblomqvist";
     repo = "learnharness";
     rev = "v${version}";
-    hash = "sha256-XkbLhhmRKv/fcNk0Dup+UF6mVNYmJFMGCJjk53HHe/U=";
+    hash = "sha256-vToGcCDA1wFKDOUZANqyWoEZLL43c+n62KLzPZ+ZKrc=";
   };
 
   pluginNames = [
