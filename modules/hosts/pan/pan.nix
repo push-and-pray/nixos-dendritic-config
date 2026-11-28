@@ -21,13 +21,17 @@
       ];
     };
 
-    # free up core 6-11 for other work
-    systemd.settings.Manager.CPUAffinity = "0-5";
+    systemd.settings.Manager.CPUAffinity = "0-1";
     boot.kernelParams = [
-      "isolcpus=domain,managed_irq,6-11"
-      "irqaffinity=0-5"
-      "kthread_cpus=0-5"
+      "isolcpus=domain,managed_irq,2-11"
+      "irqaffinity=0-1"
+      "kthread_cpus=0-1"
     ];
+
+    powerManagement = {
+      cpuFreqGovernor = "performance";
+      cpufreq.max = 2100000;
+    };
 
     services.github-runners.pan = {
       enable = true;
